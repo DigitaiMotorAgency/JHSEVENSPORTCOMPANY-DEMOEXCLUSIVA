@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JH Seven Sports Company</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+
+:root{
+  --red:#C8102E;
+  --black:#0B0B0B;
+  --white:#F8F6F1;
+  --gray:#5A5A5A;
+  --light:#EBEBEB;
+}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--black);
+  color:var(--white);
+  cursor:none;
+  overflow-x:hidden;
+}
+
+/* CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s,width 0.3s,height 0.3s,background 0.3s;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(248,246,241,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.18s ease,width 0.3s,height 0.3s,border-color 0.3s}
+.cursor.hover{width:6px;height:6px}
+.cursor-ring.hover{width:64px;height:64px;border-color:var(--red)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference}
+.nav-logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:3px;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--red)}
+.nav-right{display:flex;gap:40px;align-items:center}
+.nav-link{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--white);text-decoration:none;font-weight:400;transition:opacity 0.2s}
+.nav-link:hover{opacity:0.5}
+
+/* HERO SLIDER */
+.hero{position:relative;height:100vh;width:100%;overflow:hidden;background:var(--black)}
+.slide{position:absolute;inset:0;display:flex;align-items:flex-end;clip-path:inset(0 100% 0 0);transition:clip-path 0.9s cubic-bezier(0.77,0,0.18,1)}
+.slide.active{clip-path:inset(0 0% 0 0)}
+.slide.prev{clip-path:inset(0 0% 0 100%)}
+.slide-img{position:absolute;inset:0;background-size:cover;background-position:center top;transform:scale(1.06);transition:transform 8s ease}
+.slide.active .slide-img{transform:scale(1)}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.92) 0%,rgba(11,11,11,0.3) 50%,rgba(11,11,11,0.1) 100%)}
+.slide-content{position:relative;z-index:2;padding:0 48px 64px;width:100%}
+.slide-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:12px;opacity:0;transform:translateY(12px);transition:opacity 0.5s 0.6s,transform 0.5s 0.6s}
+.slide.active .slide-eyebrow{opacity:1;transform:translateY(0)}
+.slide-name{font-family:'Anton',sans-serif;font-size:clamp(72px,10vw,140px);line-height:0.88;letter-spacing:-1px;color:var(--white);opacity:0;transform:translateY(40px);transition:opacity 0.6s 0.4s,transform 0.6s 0.4s}
+.slide.active .slide-name{opacity:1;transform:translateY(0)}
+.slide-name .surname{color:transparent;-webkit-text-stroke:2px var(--white)}
+.slide-meta{display:flex;align-items:center;gap:32px;margin-top:20px;flex-wrap:wrap;opacity:0;transform:translateY(16px);transition:opacity 0.5s 0.7s,transform 0.5s 0.7s}
+.slide.active .slide-meta{opacity:1;transform:translateY(0)}
+.slide-club{font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:2px;text-transform:uppercase;font-weight:300;color:rgba(248,246,241,0.6)}
+.slide-pos{padding:6px 14px;border:1px solid rgba(248,246,241,0.25);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.5);font-weight:400}
+.slide-title-flag{font-size:20px}
+.slide-cta{margin-top:24px;opacity:0;transform:translateY(16px);transition:opacity 0.5s 0.8s,transform 0.5s 0.8s}
+.slide.active .slide-cta{opacity:1;transform:translateY(0)}
+.slide-cta button{background:var(--red);border:none;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:600;padding:14px 28px;cursor:none;transition:background .3s,transform .3s}
+.slide-cta button:hover{background:#e01435;transform:translateX(4px)}
+
+.slider-controls{position:absolute;right:48px;bottom:64px;z-index:10;display:flex;flex-direction:column;gap:8px}
+.slider-dot{width:2px;height:32px;background:rgba(248,246,241,0.2);cursor:none;transition:background 0.3s,height 0.3s;position:relative}
+.slider-dot::after{content:'';position:absolute;top:0;left:0;width:100%;background:var(--red);height:0%;transition:height 6s linear}
+.slider-dot.active{background:rgba(248,246,241,0.4)}
+.slider-dot.active::after{height:100%}
+.slider-counter{position:absolute;left:48px;bottom:64px;z-index:10;font-family:'Anton',sans-serif;font-size:11px;letter-spacing:3px;color:rgba(248,246,241,0.3)}
+.slider-counter span{color:var(--white);font-size:18px}
+.scroll-hint{position:absolute;left:50%;bottom:32px;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;animation:float 2.5s ease-in-out infinite}
+.scroll-hint-line{width:1px;height:40px;background:var(--red)}
+.scroll-hint-text{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(248,246,241,0.3);writing-mode:vertical-lr}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* TAGLINE */
+.tagline-section{background:var(--white);padding:80px 48px;overflow:hidden}
+.tagline-text{font-family:'Anton',sans-serif;font-size:clamp(48px,8vw,110px);line-height:0.9;color:var(--black);letter-spacing:-2px}
+.tagline-text .outline{color:transparent;-webkit-text-stroke:2px var(--black)}
+.tagline-text .red{color:var(--red)}
+.tagline-marquee{margin-top:40px;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(11,11,11,0.12);padding-top:20px}
+.tagline-marquee-inner{display:inline-flex;gap:48px;animation:marquee 18s linear infinite}
+.tagline-marquee-item{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--gray);font-weight:400;display:flex;align-items:center;gap:16px}
+.tagline-marquee-item::after{content:'✦';color:var(--red);font-size:10px}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1fr 1fr;min-height:90vh}
+.about-left{background:var(--black);padding:100px 48px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.about-left::after{content:'JH7';position:absolute;right:-20px;bottom:-40px;font-family:'Anton',sans-serif;font-size:240px;color:rgba(200,16,46,0.05);letter-spacing:-10px;pointer-events:none;line-height:1}
+.about-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:24px}
+.about-title{font-family:'Anton',sans-serif;font-size:clamp(48px,5vw,80px);line-height:0.92;letter-spacing:-1px;color:var(--white);margin-bottom:32px}
+.about-body{font-size:16px;color:rgba(248,246,241,0.55);line-height:1.85;max-width:400px;font-weight:300}
+.about-body strong{color:var(--white);font-weight:500}
+.about-quote{margin-top:40px;font-family:'DM Sans',sans-serif;font-size:18px;font-style:italic;color:var(--white);border-left:3px solid var(--red);padding-left:20px;line-height:1.5}
+.about-right{background:var(--red);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.about-stat{display:flex;flex-direction:column;justify-content:center;padding:48px;border:1px solid rgba(248,246,241,0.1);position:relative;overflow:hidden;transition:background 0.3s}
+.about-stat:hover{background:rgba(0,0,0,0.15)}
+.about-stat-n{font-family:'Anton',sans-serif;font-size:72px;line-height:1;color:var(--white);margin-bottom:4px}
+.about-stat-n sup{font-size:32px;color:rgba(248,246,241,0.5)}
+.about-stat-l{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.6);font-weight:400}
+
+/* PLAYERS GRID */
+.players{background:var(--black);padding:120px 0 60px}
+.players-header{padding:0 48px 60px;display:flex;justify-content:space-between;align-items:flex-end}
+.players-title{font-family:'Anton',sans-serif;font-size:clamp(40px,6vw,80px);line-height:0.9;letter-spacing:-1px}
+.players-title .outline{color:transparent;-webkit-text-stroke:1px var(--white)}
+.players-subtitle{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.35);font-weight:400;max-width:280px;text-align:right;line-height:1.7}
+.players-masonry{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
+.pcard:nth-child(1){grid-column:1/9;grid-row:1}
+.pcard:nth-child(2){grid-column:9/13;grid-row:1}
+.pcard:nth-child(3){grid-column:1/5;grid-row:2}
+.pcard:nth-child(4){grid-column:5/13;grid-row:2}
+.pcard:nth-child(5){grid-column:1/5;grid-row:3}
+.pcard:nth-child(6){grid-column:5/9;grid-row:3}
+.pcard:nth-child(7){grid-column:9/13;grid-row:3}
+.pcard{position:relative;overflow:hidden;cursor:none}
+.pcard-inner{position:relative;padding-top:110%;background:var(--black);overflow:hidden}
+.pcard:nth-child(1) .pcard-inner{padding-top:65%}
+.pcard:nth-child(2) .pcard-inner{padding-top:140%}
+.pcard:nth-child(3) .pcard-inner{padding-top:120%}
+.pcard:nth-child(4) .pcard-inner{padding-top:75%}
+.pcard:nth-child(5) .pcard-inner{padding-top:120%}
+.pcard:nth-child(6) .pcard-inner{padding-top:120%}
+.pcard:nth-child(7) .pcard-inner{padding-top:120%}
+.pcard-bg{position:absolute;inset:0;background-size:cover;background-position:center 15%;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);filter:grayscale(30%)}
+.pcard:hover .pcard-bg{transform:scale(1.07);filter:grayscale(0%)}
+.pcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.96) 0%,rgba(11,11,11,0.2) 60%,transparent 100%);transition:background 0.4s}
+.pcard:hover .pcard-overlay{background:linear-gradient(to top,rgba(11,11,11,0.98) 0%,rgba(11,11,11,0.5) 60%,rgba(200,16,46,0.1) 100%)}
+.pcard::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform 0.5s cubic-bezier(0.77,0,0.18,1);z-index:5}
+.pcard:hover::before{transform:scaleY(1)}
+.pcard-content{position:absolute;bottom:0;left:0;right:0;padding:28px 32px;z-index:3}
+.pcard-flag{font-size:22px;margin-bottom:4px;display:block}
+.pcard-name{font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,54px);line-height:0.9;color:var(--white);margin-bottom:4px}
+.pcard-name .fam{display:block;font-size:0.6em;color:rgba(248,246,241,0.45);letter-spacing:1px}
+.pcard-club{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.4);font-weight:400;margin-bottom:10px;transform:translateY(8px);opacity:0;transition:transform 0.4s,opacity 0.4s}
+.pcard:hover .pcard-club{transform:translateY(0);opacity:1}
+.pcard-trophy{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(200,16,46,0.9);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--white);transform:translateY(8px);opacity:0;transition:transform 0.4s 0.05s,opacity 0.4s 0.05s}
+.pcard:hover .pcard-trophy{transform:translateY(0);opacity:1}
+/* "Ver ficha" hint */
+.pcard-viewhint{position:absolute;top:24px;left:32px;z-index:4;display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;opacity:0;transform:translateX(-10px);transition:opacity .4s,transform .4s}
+.pcard-viewhint .badge{width:26px;height:26px;border:1px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+.pcard:hover .pcard-viewhint{opacity:1;transform:translateX(0)}
+.pcard-bg.ya{background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80'),linear-gradient(135deg,#1a1a2e,#16213e)}
+.pcard-bg.jd{background-image:url('https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=800&q=80'),linear-gradient(135deg,#2d1b00,#1a0a0a)}
+.pcard-bg.jm{background-image:url('https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800&q=80'),linear-gradient(135deg,#0a2400,#001a0a)}
+.pcard-bg.jb{background-image:url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=800&q=80'),linear-gradient(135deg,#1a1a1a,#2d2d2d)}
+.pcard-bg.jdz{background-image:linear-gradient(135deg,#1a1a2e,#0a0a14)}
+.pcard-bg.ce{background-image:linear-gradient(135deg,#002400,#0a1a0a)}
+.pcard-bg.dm{background-image:linear-gradient(135deg,#241400,#1a0a00)}
+.pcard-num{position:absolute;top:20px;right:24px;font-family:'Anton',sans-serif;font-size:100px;color:rgba(248,246,241,0.04);line-height:1;pointer-events:none;z-index:2}
+
+/* ════════ FICHA TÉCNICA MODAL ════════ */
+.ficha-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(5,5,7,0.85);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;opacity:0;pointer-events:none;transition:opacity .4s;
+}
+.ficha-overlay.open{opacity:1;pointer-events:auto}
+.ficha{
+  width:100%;max-width:1000px;max-height:90vh;overflow-y:auto;
+  background:linear-gradient(160deg,#141418 0%,#0c0c0f 100%);
+  border:1px solid rgba(200,16,46,0.3);
+  display:grid;grid-template-columns:0.85fr 1.15fr;
+  transform:scale(0.92) translateY(20px);transition:transform .45s cubic-bezier(0.16,1,0.3,1);
+  position:relative;
+}
+.ficha-overlay.open .ficha{transform:scale(1) translateY(0)}
+.ficha::-webkit-scrollbar{width:6px}
+.ficha::-webkit-scrollbar-thumb{background:var(--red)}
+.ficha-close{position:absolute;top:18px;right:18px;z-index:10;width:42px;height:42px;border:1px solid rgba(248,246,241,0.2);background:rgba(0,0,0,0.4);color:#fff;border-radius:50%;font-size:20px;cursor:none;display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s}
+.ficha-close:hover{background:var(--red);transform:rotate(90deg)}
+
+/* lado izquierdo: foto + carta tipo FIFA */
+.ficha-photo{
+  position:relative;min-height:420px;
+  background:linear-gradient(160deg,#1c1c24,#0a0a0d);
+  background-size:cover;background-position:center top;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:28px;
+}
+.ficha-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.9),transparent 55%);z-index:1}
+.ficha-rating{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start}
+.ficha-rating .ovr{font-family:'Anton',sans-serif;font-size:64px;line-height:0.8;color:var(--red)}
+.ficha-rating .ovr-l{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(248,246,241,0.6)}
+.ficha-rating .posbadge{margin-top:8px;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;padding:4px 12px}
+.ficha-photo-name{position:relative;z-index:2}
+.ficha-photo-name .first{font-family:'Barlow Condensed',sans-serif;font-size:16px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.6)}
+.ficha-photo-name .last{font-family:'Anton',sans-serif;font-size:clamp(32px,4vw,46px);line-height:0.9;color:#fff}
+.ficha-photo-ph{position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);text-align:center;color:#33333d;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;z-index:1}
+
+/* lado derecho: datos */
+.ficha-data{padding:40px 38px}
+.ficha-flags{font-size:24px;margin-bottom:6px}
+.ficha-club{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:600}
+.ficha-fullname{font-family:'Anton',sans-serif;font-size:34px;line-height:0.95;margin:6px 0 22px;color:#fff}
+.ficha-bio{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(248,246,241,0.08);border:1px solid rgba(248,246,241,0.08);margin-bottom:26px;
+}
+.ficha-bio div{background:#101015;padding:14px 16px}
+.ficha-bio .k{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(248,246,241,0.4)}
+.ficha-bio .v{font-family:'Anton',sans-serif;font-size:18px;color:#fff;margin-top:3px}
+.ficha-section-t{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.5);font-weight:600;margin:0 0 14px;display:flex;align-items:center;gap:10px}
+.ficha-section-t::before{content:'';width:18px;height:2px;background:var(--red)}
+/* barras de atributos */
+.attr{margin-bottom:12px}
+.attr-top{display:flex;justify-content:space-between;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.attr-top .av{font-family:'Anton',sans-serif;color:var(--red)}
+.attr-bar{height:5px;background:rgba(248,246,241,0.1);overflow:hidden}
+.attr-fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),#ff4d6a);transition:width 1s cubic-bezier(0.16,1,0.3,1)}
+/* trayectoria */
+.traj{list-style:none;margin-bottom:24px}
+.traj li{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid rgba(248,246,241,0.06);font-size:14px;color:rgba(248,246,241,0.6)}
+.traj li .yr{font-family:'Anton',sans-serif;color:#fff;min-width:64px;font-size:13px}
+.traj li .cl{color:#fff;font-weight:500}
+.ficha-cta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.ficha-cta a{flex:1;min-width:160px;text-align:center;text-decoration:none;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:14px;transition:all .3s}
+.ficha-cta .b1{background:var(--red);color:#fff}
+.ficha-cta .b1:hover{background:#e01435}
+.ficha-cta .b2{border:1px solid rgba(248,246,241,0.2);color:#fff}
+.ficha-cta .b2:hover{border-color:#fff}
+
+/* DEALS */
+.deals-section{background:var(--white);padding:120px 48px;overflow:hidden}
+.deals-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
+.deals-title{font-family:'Anton',sans-serif;font-size:clamp(40px,5.5vw,80px);line-height:0.9;color:var(--black);letter-spacing:-1px}
+.deals-title .outline-dark{color:transparent;-webkit-text-stroke:2px var(--black)}
+.deals-sub{font-family:'DM Sans',sans-serif;font-size:14px;color:var(--gray);max-width:260px;text-align:right;line-height:1.7;font-weight:300}
+.deals-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.deal-card{background:var(--black);padding:40px 32px;position:relative;overflow:hidden;transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)}
+.deal-card:hover{transform:translateY(-8px)}
+.deal-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform 0.4s cubic-bezier(0.77,0,0.18,1)}
+.deal-card:hover::after{transform:scaleX(1)}
+.deal-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(200,16,46,0.15);border:1px solid rgba(200,16,46,0.3);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:24px}
+.deal-badge::before{content:'✓'}
+.deal-player-name{font-family:'Anton',sans-serif;font-size:32px;line-height:0.9;color:var(--white);margin-bottom:8px;letter-spacing:0.5px}
+.deal-club{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.35);font-weight:300;margin-bottom:16px}
+.deal-flags{display:flex;gap:8px;font-size:22px;margin-bottom:20px}
+.deal-desc{font-size:13px;color:rgba(248,246,241,0.4);line-height:1.7;font-weight:300;border-top:1px solid rgba(248,246,241,0.07);padding-top:16px}
+
+/* SERVICES */
+.services{background:var(--black);padding:120px 48px}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.services-left .section-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:20px}
+.services-big-title{font-family:'Anton',sans-serif;font-size:clamp(44px,5vw,80px);line-height:0.88;letter-spacing:-1px;color:var(--white)}
+.services-big-title .outline{color:transparent;-webkit-text-stroke:1px rgba(248,246,241,0.3)}
+.services-note{margin-top:32px;font-size:15px;color:rgba(248,246,241,0.4);line-height:1.8;font-weight:300;max-width:360px}
+.services-list{list-style:none;border-top:1px solid rgba(248,246,241,0.08)}
+.service-item{border-bottom:1px solid rgba(248,246,241,0.08);overflow:hidden}
+.service-item-header{display:flex;justify-content:space-between;align-items:center;padding:24px 0;cursor:none}
+.service-item-header:hover .service-n{color:var(--red)}
+.service-n{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.25);transition:color 0.3s;min-width:32px}
+.service-name{font-family:'Anton',sans-serif;font-size:clamp(20px,2.5vw,32px);letter-spacing:0.5px;color:var(--white);flex:1;padding:0 20px}
+.service-arrow{width:32px;height:32px;border:1px solid rgba(248,246,241,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(248,246,241,0.4);transition:transform 0.3s,background 0.3s,border-color 0.3s}
+.service-item.open .service-arrow{transform:rotate(45deg);background:var(--red);border-color:var(--red);color:var(--white)}
+.service-body{max-height:0;overflow:hidden;transition:max-height 0.45s cubic-bezier(0.77,0,0.18,1)}
+.service-item.open .service-body{max-height:200px}
+.service-body-inner{padding:0 52px 24px;font-size:14px;color:rgba(248,246,241,0.4);line-height:1.8;font-weight:300}
+
+/* CONTACT */
+.contact{background:var(--red);padding:120px 48px;position:relative;overflow:hidden}
+.contact::before{content:'JHSEVEN';position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:'Anton',sans-serif;font-size:260px;color:rgba(0,0,0,0.08);pointer-events:none;white-space:nowrap;line-height:1}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1200px}
+.contact-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(248,246,241,0.6);font-weight:600;margin-bottom:20px}
+.contact-title{font-family:'Anton',sans-serif;font-size:clamp(48px,6vw,96px);line-height:0.88;letter-spacing:-2px;color:var(--white);margin-bottom:32px}
+.contact-ig{display:inline-block;align-items:center;gap:12px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.7);font-weight:400;text-decoration:none;border-bottom:1px solid rgba(248,246,241,0.3);padding-bottom:6px;margin-bottom:40px;transition:color 0.3s,border-color 0.3s}
+.contact-ig:hover{color:var(--white);border-color:var(--white)}
+.contact-note{font-size:15px;color:rgba(248,246,241,0.6);line-height:1.8;font-weight:300;max-width:380px}
+.contact-form{position:relative;z-index:2}
+.form-g{margin-bottom:16px}
+.form-g label{display:block;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.5);font-weight:600;margin-bottom:6px}
+.form-g input,.form-g select,.form-g textarea{width:100%;background:rgba(0,0,0,0.2);border:1px solid rgba(248,246,241,0.15);color:var(--white);padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:14px;outline:none;resize:none;border-radius:0;transition:border-color 0.3s,background 0.3s}
+.form-g input::placeholder,.form-g textarea::placeholder{color:rgba(248,246,241,0.25)}
+.form-g input:focus,.form-g select:focus,.form-g textarea:focus{border-color:rgba(248,246,241,0.6);background:rgba(0,0,0,0.3)}
+.form-g select option{background:#8b0000;color:#fff}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-submit{width:100%;background:var(--black);color:var(--white);border:none;padding:18px;font-family:'Anton',sans-serif;font-size:18px;letter-spacing:3px;cursor:none;transition:background 0.3s,transform 0.2s;margin-top:8px}
+.btn-submit:hover{background:#1a1a1a;transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-logo{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:4px;color:rgba(248,246,241,0.25)}
+.footer-logo span{color:var(--red)}
+.footer-copy{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(248,246,241,0.2);text-transform:uppercase}
+.footer-links{display:flex;gap:32px}
+.footer-links a{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(248,246,241,0.25);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--white)}
+
+/* REVEAL */
+.reveal-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94)}
+.reveal-up.in{opacity:1;transform:translateY(0)}
+
+/* MOBILE */
+@media(max-width:768px){
+  nav{padding:20px 24px}
+  .nav-right .nav-link{display:none}
+  .about{grid-template-columns:1fr}
+  .about-right{grid-template-columns:1fr 1fr}
+  .players-masonry{grid-template-columns:1fr 1fr}
+  .pcard:nth-child(1){grid-column:1/3}
+  .pcard:nth-child(2){grid-column:1/3}
+  .pcard:nth-child(3){grid-column:1/2}
+  .pcard:nth-child(4){grid-column:2/3}
+  .pcard:nth-child(5){grid-column:1/2}
+  .pcard:nth-child(6){grid-column:2/3}
+  .pcard:nth-child(7){grid-column:1/3}
+  .pcard:nth-child(n) .pcard-inner{padding-top:120%}
+  .pcard:nth-child(1) .pcard-inner,.pcard:nth-child(2) .pcard-inner,.pcard:nth-child(7) .pcard-inner{padding-top:75%}
+  .deals-grid{grid-template-columns:1fr 1fr}
+  .services-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .players-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .players-subtitle{text-align:left}
+  .deals-header{flex-direction:column;align-items:flex-start;gap:16px}
+  .deals-sub{text-align:left}
+  .form-row{grid-template-columns:1fr}
+  footer{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .cursor,.cursor-ring{display:none}
+  body{cursor:auto}
+  .slide-name{font-size:clamp(48px,12vw,80px)}
+  .tagline-text{font-size:clamp(36px,10vw,72px)}
+  section,.about-left,.deals-section,.services,.contact{padding-left:24px;padding-right:24px}
+  .players-header,.deals-header{padding-left:24px;padding-right:24px}
+  footer{padding:32px 24px}
+  /* ficha mobile: una columna */
+  .ficha{grid-template-columns:1fr;max-height:88vh}
+  .ficha-photo{min-height:280px}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo">JH<span>7</span></a>
+  <div class="nav-right">
+    <a href="#jugadores" class="nav-link">Jugadores</a>
+    <a href="#servicios" class="nav-link">Servicios</a>
+    <a href="#contacto" class="nav-link">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO SLIDER -->
+<section class="hero" id="inicio">
+  <div class="slide active" id="slide-0">
+    <div class="slide-img ya" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=85&fit=crop&crop=faces');background-position:center top;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">🇨🇴 Colombia → 🇹🇷 Turquía</div>
+      <div class="slide-name"><span>YASER</span><br><span class="surname">ASPRILLA</span></div>
+      <div class="slide-meta">
+        <span class="slide-club">Galatasaray SK</span>
+        <span class="slide-pos">Extremo</span>
+        <span class="slide-title-flag">🏆 Campeón Süperlig</span>
+      </div>
+      <div class="slide-cta"><button onclick="openFicha('asprilla')">Ver ficha técnica →</button></div>
+    </div>
+  </div>
+  <div class="slide" id="slide-1">
+    <div class="slide-img" style="background-image:url('https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=1600&q=85&fit=crop&crop=faces');background-position:center 20%;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">🇨🇴 Colombia → 🇷🇺 Rusia</div>
+      <div class="slide-name"><span>JADER</span><br><span class="surname">DURÁN</span></div>
+      <div class="slide-meta">
+        <span class="slide-club">FC Zenit / Fenerbahçe</span>
+        <span class="slide-pos">Delantero</span>
+        <span class="slide-title-flag">🏅 Süper Kupa</span>
+      </div>
+      <div class="slide-cta"><button onclick="openFicha('duran')">Ver ficha técnica →</button></div>
+    </div>
+  </div>
+  <div class="slide" id="slide-2">
+    <div class="slide-img" style="background-image:url('https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=1600&q=85&fit=crop&crop=faces');background-position:center 20%;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-eyebrow">🇨🇴 Colombia — Deal Done ✅</div>
+      <div class="slide-name"><span>JOAHN</span><br><span class="surname">MARTÍNEZ</span></div>
+      <div class="slide-meta">
+        <span class="slide-club">Deportivo Cali</span>
+        <span class="slide-pos">Mediocampista</span>
+        <span class="slide-title-flag">📝 Renovación 2029</span>
+      </div>
+      <div class="slide-cta"><button onclick="openFicha('martinez')">Ver ficha técnica →</button></div>
+    </div>
+  </div>
+
+  <div class="slider-controls">
+    <div class="slider-dot active" onclick="goSlide(0)"></div>
+    <div class="slider-dot" onclick="goSlide(1)"></div>
+    <div class="slider-dot" onclick="goSlide(2)"></div>
+  </div>
+  <div class="slider-counter"><span id="slideNum">01</span> / 03</div>
+  <div class="scroll-hint"><div class="scroll-hint-line"></div><div class="scroll-hint-text">Scroll</div></div>
+</section>
+
+<!-- TAGLINE -->
+<div class="tagline-section">
+  <div class="tagline-text reveal-up">DESDE LA<br><span class="outline">BASE</span> HASTA<br>LO <span class="red">PROFESIONAL.</span></div>
+  <div class="tagline-marquee"><div class="tagline-marquee-inner">
+    <div class="tagline-marquee-item">Colombia</div><div class="tagline-marquee-item">Turquía</div><div class="tagline-marquee-item">Rusia</div><div class="tagline-marquee-item">Abu Dhabi</div><div class="tagline-marquee-item">Brasil</div><div class="tagline-marquee-item">Agente FIFA</div><div class="tagline-marquee-item">Deal Done</div><div class="tagline-marquee-item">Campeones</div>
+    <div class="tagline-marquee-item">Colombia</div><div class="tagline-marquee-item">Turquía</div><div class="tagline-marquee-item">Rusia</div><div class="tagline-marquee-item">Abu Dhabi</div><div class="tagline-marquee-item">Brasil</div><div class="tagline-marquee-item">Agente FIFA</div><div class="tagline-marquee-item">Deal Done</div><div class="tagline-marquee-item">Campeones</div>
+  </div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-left reveal-up">
+    <div class="about-eyebrow">JH Seven Sports Company</div>
+    <h2 class="about-title">TU CARRERA<br>ES<br>NUESTRA<br>MISIÓN.</h2>
+    <p class="about-body">Somos una agencia de representación deportiva <strong>especializada en fútbol colombiano</strong> con proyección global. Negociamos en los mercados más exigentes — Turquía, Rusia, Emiratos Árabes, Sudamérica — siempre al lado del jugador.</p>
+    <blockquote class="about-quote">"Asesoramos y acompañamos al jugador de fútbol en su proceso desde la base a lo profesional."</blockquote>
+  </div>
+  <div class="about-right">
+    <div class="about-stat"><div class="about-stat-n"><sup>+</sup>19</div><div class="about-stat-l">Mil Seguidores</div></div>
+    <div class="about-stat"><div class="about-stat-n">6</div><div class="about-stat-l">Países Activos</div></div>
+    <div class="about-stat"><div class="about-stat-n">4</div><div class="about-stat-l">Títulos Ganados</div></div>
+    <div class="about-stat"><div class="about-stat-n"><sup>+</sup>15</div><div class="about-stat-l">Deals Cerrados</div></div>
+  </div>
+</section>
+
+<!-- PLAYERS GRID -->
+<section class="players" id="jugadores">
+  <div class="players-header reveal-up">
+    <h2 class="players-title">NUESTROS<br><span class="outline">JUGADORES</span></h2>
+    <p class="players-subtitle">Colombianos compitiendo en las ligas más exigentes del mundo. Tocá una ficha para ver el perfil completo.</p>
+  </div>
+  <div class="players-masonry">
+    <div class="pcard" onclick="openFicha('asprilla')">
+      <div class="pcard-inner">
+        <div class="pcard-bg ya"></div><div class="pcard-overlay"></div><div class="pcard-num">10</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇨🇴 🇹🇷</span>
+          <div class="pcard-name"><span class="fam">Yaser</span>ASPRILLA</div>
+          <div class="pcard-club">Galatasaray SK — Extremo</div>
+          <div class="pcard-trophy">🏆 Campeón Süperlig</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard" onclick="openFicha('duran')">
+      <div class="pcard-inner">
+        <div class="pcard-bg jd"></div><div class="pcard-overlay"></div><div class="pcard-num">9</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇨🇴 🇷🇺 🇹🇷</span>
+          <div class="pcard-name"><span class="fam">Jader</span>DURÁN</div>
+          <div class="pcard-club">FC Zenit / Fenerbahçe</div>
+          <div class="pcard-trophy">🏅 Süper Kupa</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard" onclick="openFicha('martinez')">
+      <div class="pcard-inner">
+        <div class="pcard-bg jm"></div><div class="pcard-overlay"></div><div class="pcard-num">8</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇨🇴</span>
+          <div class="pcard-name"><span class="fam">Joahn</span>MARTÍNEZ</div>
+          <div class="pcard-club">Deportivo Cali</div>
+          <div class="pcard-trophy">✅ Renovación 2029</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard" onclick="openFicha('bonilla')">
+      <div class="pcard-inner">
+        <div class="pcard-bg jb"></div><div class="pcard-overlay"></div><div class="pcard-num">4</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇨🇴</span>
+          <div class="pcard-name"><span class="fam">Juan D.</span>BONILLA</div>
+          <div class="pcard-club">En activo</div>
+          <div class="pcard-trophy">⚽ Defensa</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard" onclick="openFicha('diaz')">
+      <div class="pcard-inner">
+        <div class="pcard-bg jdz"></div><div class="pcard-overlay"></div><div class="pcard-num">7</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇨🇴</span>
+          <div class="pcard-name"><span class="fam">Jesús</span>DÍAZ</div>
+          <div class="pcard-club">En activo</div>
+          <div class="pcard-trophy">⚽ Representado</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard" onclick="openFicha('caio')">
+      <div class="pcard-inner">
+        <div class="pcard-bg ce"></div><div class="pcard-overlay"></div><div class="pcard-num">11</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇧🇷</span>
+          <div class="pcard-name"><span class="fam">Caio</span>EDUARDO</div>
+          <div class="pcard-club">En activo</div>
+          <div class="pcard-trophy">⚽ Representado</div>
+        </div>
+      </div>
+    </div>
+    <div class="pcard" onclick="openFicha('danovis')">
+      <div class="pcard-inner">
+        <div class="pcard-bg dm"></div><div class="pcard-overlay"></div><div class="pcard-num">5</div>
+        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
+        <div class="pcard-content">
+          <span class="pcard-flag">🇨🇴</span>
+          <div class="pcard-name"><span class="fam">Danovis</span>MARTÍNEZ</div>
+          <div class="pcard-club">En activo</div>
+          <div class="pcard-trophy">⚽ Representado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FICHA TÉCNICA MODAL -->
+<div class="ficha-overlay" id="fichaOverlay" onclick="if(event.target===this)closeFicha()">
+  <div class="ficha">
+    <button class="ficha-close" onclick="closeFicha()">×</button>
+    <div class="ficha-photo" id="fichaPhoto">
+      <div class="ficha-photo-ph" id="fichaPhotoPh"></div>
+      <div class="ficha-rating">
+        <div class="ovr" id="fOvr">85</div>
+        <div class="ovr-l">Valoración</div>
+        <div class="posbadge" id="fPosBadge">EXT</div>
+      </div>
+      <div class="ficha-photo-name">
+        <div class="first" id="fFirst">Yaser</div>
+        <div class="last" id="fLast">Asprilla</div>
+      </div>
+    </div>
+    <div class="ficha-data">
+      <div class="ficha-flags" id="fFlags">🇨🇴 🇹🇷</div>
+      <div class="ficha-club" id="fClub">Galatasaray SK · Turquía</div>
+      <div class="ficha-fullname" id="fFullname">Yaser Asprilla</div>
+
+      <div class="ficha-bio" id="fBio"></div>
+
+      <div class="ficha-section-t">Atributos</div>
+      <div id="fAttrs" style="margin-bottom:26px"></div>
+
+      <div class="ficha-section-t">Trayectoria</div>
+      <ul class="traj" id="fTraj"></ul>
+
+      <div class="ficha-cta">
+        <a href="#contacto" class="b1" onclick="closeFicha()">Consultar disponibilidad</a>
+        <a href="#" class="b2" id="fHighlights" target="_blank">Ver highlights ▶</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEALS -->
+<section class="deals-section" id="deals">
+  <div class="deals-header reveal-up">
+    <h2 class="deals-title">DEAL<br><span class="outline-dark">DONE.</span></h2>
+    <p class="deals-sub">Transfers y renovaciones cerradas en cuatro continentes.</p>
+  </div>
+  <div class="deals-grid">
+    <div class="deal-card reveal-up"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 → 🇹🇷</div><div class="deal-player-name">Yaser Asprilla</div><div class="deal-club">Galatasaray SK — Süperlig</div><div class="deal-desc">Nuestro jugador se proclamó CAMPEÓN de la Süperlig de Turquía. El negocio cerrado con uno de los clubes más grandes de Europa.</div></div>
+    <div class="deal-card reveal-up" style="transition-delay:0.1s"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 → 🇷🇺</div><div class="deal-player-name">Jader Durán</div><div class="deal-club">FC Zenit — San Petersburgo</div><div class="deal-desc">Nuestro goleador llega al club más grande de Rusia. Negociación cerrada en Abu Dhabi. Vamos a por todo.</div></div>
+    <div class="deal-card reveal-up" style="transition-delay:0.2s"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 🏟️</div><div class="deal-player-name">Joahn Martínez</div><div class="deal-club">Deportivo Cali — 2029</div><div class="deal-desc">Renovación hasta 2029. Un jugador formado, una carrera construida. Deal gestionado íntegramente por JH Seven.</div></div>
+    <div class="deal-card reveal-up" style="transition-delay:0.3s"><div class="deal-badge">Campeón</div><div class="deal-flags">🇨🇴 → 🇹🇷</div><div class="deal-player-name">Jader Durán</div><div class="deal-club">Fenerbahçe — Süper Kupa</div><div class="deal-desc">Campeón de la Supercopa de Turquía. Cada título de nuestro jugador es también nuestro título.</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="services-grid">
+    <div class="services-left reveal-up">
+      <div class="section-eyebrow">Lo que hacemos</div>
+      <h2 class="services-big-title">SERVICIO<br><span class="outline">TOTAL</span><br>AL<br>JUGADOR.</h2>
+      <p class="services-note">No somos intermediarios. Somos el equipo detrás del jugador — en la negociación, en el campo y en la vida.</p>
+    </div>
+    <ul class="services-list reveal-up" style="transition-delay:0.15s">
+      <li class="service-item" onclick="toggleService(this)"><div class="service-item-header"><span class="service-n">01</span><span class="service-name">Representación Contractual</span><span class="service-arrow">+</span></div><div class="service-body"><div class="service-body-inner">Negociamos y cerramos contratos en ligas nacionales e internacionales bajo estándares FIFA. Tu carrera y tus derechos, protegidos en cada cláusula.</div></div></li>
+      <li class="service-item" onclick="toggleService(this)"><div class="service-item-header"><span class="service-n">02</span><span class="service-name">Gestión Internacional</span><span class="service-arrow">+</span></div><div class="service-body"><div class="service-body-inner">Acceso directo a mercados en Europa, Rusia, Medio Oriente y LATAM. Tenemos los contactos y la presencia que abren puertas donde otros no llegan.</div></div></li>
+      <li class="service-item" onclick="toggleService(this)"><div class="service-item-header"><span class="service-n">03</span><span class="service-name">Desarrollo desde la Base</span><span class="service-arrow">+</span></div><div class="service-body"><div class="service-body-inner">Detectamos talento en formación y diseñamos la ruta hacia el profesionalismo. Acompañamiento real desde categorías juveniles hasta primera división.</div></div></li>
+      <li class="service-item" onclick="toggleService(this)"><div class="service-item-header"><span class="service-n">04</span><span class="service-name">Imagen y Sponsorships</span><span class="service-arrow">+</span></div><div class="service-body"><div class="service-body-inner">Gestión de marca personal, acuerdos comerciales y posicionamiento mediático dentro y fuera del campo. El jugador como marca global.</div></div></li>
+      <li class="service-item" onclick="toggleService(this)"><div class="service-item-header"><span class="service-n">05</span><span class="service-name">Asesoría Legal y FIFA</span><span class="service-arrow">+</span></div><div class="service-body"><div class="service-body-inner">Contratos, transferencias, homologaciones internacionales. Todo bajo normativa FIFA para garantizar seguridad jurídica en cualquier mercado.</div></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-grid">
+    <div class="reveal-up">
+      <div class="contact-eyebrow">Representación</div>
+      <h2 class="contact-title">HABLEMOS<br>DE TU<br>FUTURO.</h2>
+      <a href="https://instagram.com/jhsevensportscompany" target="_blank" class="contact-ig">📸 @jhsevensportscompany</a>
+      <p class="contact-note">Cada campeón empezó siendo un sueño. Si tienes el talento, nosotros ponemos el camino. Envíanos tu perfil y evaluamos tu caso personalmente.</p>
+    </div>
+    <form class="contact-form reveal-up" style="transition-delay:0.15s" onsubmit="return submitForm(event)">
+      <div class="form-row">
+        <div class="form-g"><label>Nombre del jugador</label><input type="text" placeholder="Tu nombre completo"></div>
+        <div class="form-g"><label>Edad</label><input type="number" placeholder="Años" min="14" max="45"></div>
+      </div>
+      <div class="form-g"><label>Posición</label><select><option value="">Selecciona tu posición</option><option>Portero</option><option>Defensa Central</option><option>Lateral Derecho / Izquierdo</option><option>Mediocampista Defensivo</option><option>Mediocampista Creativo</option><option>Extremo / Alero</option><option>Delantero Centro</option></select></div>
+      <div class="form-g"><label>Club o categoría actual</label><input type="text" placeholder="¿Dónde juegas ahora?"></div>
+      <div class="form-g"><label>Tu historia</label><textarea rows="4" placeholder="Cuéntanos sobre tu carrera y tus objetivos..."></textarea></div>
+      <button type="submit" class="btn-submit" id="submitBtn">QUIERO REPRESENTACIÓN →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">JH<span>7</span> SPORTS COMPANY</div>
+  <div class="footer-copy">© 2025 JH Seven Sports Company — Todos los derechos reservados</div>
+  <div class="footer-links">
+    <a href="#nosotros">Nosotros</a><a href="#jugadores">Jugadores</a><a href="#contacto">Contacto</a><a href="https://instagram.com/jhsevensportscompany" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+/* ════════ DATOS DE LOS JUGADORES — EDITÁ ACÁ ════════
+   Para cada jugador podés cambiar todo: foto, valoración, datos físicos,
+   atributos (0-99), trayectoria y link de highlights.
+   La FOTO: reemplazá "photo" por la ruta real, ej 'assets/asprilla.jpg' */
+const PLAYERS = {
+  asprilla:{
+    first:"Yaser", last:"Asprilla", fullname:"Yáser Asprilla Mosquera",
+    flags:"🇨🇴 🇹🇷", club:"Galatasaray SK · Turquía",
+    ovr:"84", posBadge:"EXT",
+    photo:"", /* -> 'assets/asprilla.jpg' */
+    bio:[["Edad","22"],["Altura","1,78 m"],["Pie","Derecho"],["Posición","Extremo / Mediapunta"],["Dorsal","10"],["Valor","€18M"]],
+    attrs:[["Regate",88],["Velocidad",86],["Visión de juego",84],["Pase",82],["Tiro",78]],
+    traj:[["2025","Galatasaray (TUR)"],["2023","Watford FC (ENG)"],["2021","Envigado FC (COL)"]],
+    highlights:"#"
+  },
+  duran:{
+    first:"Jader", last:"Durán", fullname:"Jhon Jáder Durán",
+    flags:"🇨🇴 🇷🇺 🇹🇷", club:"FC Zenit · Rusia",
+    ovr:"83", posBadge:"DC",
+    photo:"",
+    bio:[["Edad","21"],["Altura","1,85 m"],["Pie","Derecho"],["Posición","Delantero Centro"],["Dorsal","9"],["Valor","€22M"]],
+    attrs:[["Definición",87],["Potencia",89],["Velocidad",85],["Juego aéreo",82],["Remate lejano",84]],
+    traj:[["2025","FC Zenit (RUS)"],["2025","Fenerbahçe (TUR)"],["2024","Aston Villa (ENG)"],["2022","Chicago Fire (USA)"]],
+    highlights:"#"
+  },
+  martinez:{
+    first:"Joahn", last:"Martínez", fullname:"Joahn Martínez",
+    flags:"🇨🇴", club:"Deportivo Cali · Colombia",
+    ovr:"76", posBadge:"MC",
+    photo:"",
+    bio:[["Edad","19"],["Altura","1,74 m"],["Pie","Izquierdo"],["Posición","Mediocampista"],["Dorsal","8"],["Valor","€3M"]],
+    attrs:[["Pase",82],["Visión de juego",80],["Regate",78],["Recuperación",75],["Resistencia",84]],
+    traj:[["2025","Deportivo Cali — Renovación 2029"],["2023","Deportivo Cali (COL)"],["2021","Divisiones menores"]],
+    highlights:"#"
+  },
+  bonilla:{
+    first:"Juan D.", last:"Bonilla", fullname:"Juan David Bonilla",
+    flags:"🇨🇴", club:"En activo · Colombia",
+    ovr:"72", posBadge:"DEF",
+    photo:"",
+    bio:[["Edad","20"],["Altura","1,83 m"],["Pie","Derecho"],["Posición","Defensa Central"],["Dorsal","4"],["Valor","€1,5M"]],
+    attrs:[["Marca",80],["Juego aéreo",82],["Anticipación",78],["Fuerza",81],["Salida de balón",74]],
+    traj:[["2024","Club actual (COL)"],["2022","Categorías formativas"]],
+    highlights:"#"
+  },
+  diaz:{
+    first:"Jesús", last:"Díaz", fullname:"Jesús Díaz",
+    flags:"🇨🇴", club:"En activo · Colombia",
+    ovr:"75", posBadge:"EXT",
+    photo:"",
+    bio:[["Edad","20"],["Altura","1,76 m"],["Pie","Derecho"],["Posición","Extremo"],["Dorsal","7"],["Valor","€2M"]],
+    attrs:[["Regate",80],["Velocidad",82],["Pase",76],["Tiro",74],["Resistencia",80]],
+    traj:[["2026","Club actual"],["2024","Divisiones menores"]],
+    highlights:"#"
+  },
+  caio:{
+    first:"Caio", last:"Eduardo", fullname:"Caio Eduardo",
+    flags:"🇧🇷", club:"En activo · Brasil",
+    ovr:"74", posBadge:"DC",
+    photo:"",
+    bio:[["Edad","19"],["Altura","1,80 m"],["Pie","Derecho"],["Posición","Delantero"],["Dorsal","11"],["Valor","€2,5M"]],
+    attrs:[["Definición",79],["Velocidad",80],["Regate",78],["Potencia",76],["Juego aéreo",73]],
+    traj:[["2026","Club actual (BRA)"],["2024","Base"]],
+    highlights:"#"
+  },
+  danovis:{
+    first:"Danovis", last:"Martínez", fullname:"Danovis Martínez",
+    flags:"🇨🇴", club:"En activo · Colombia",
+    ovr:"73", posBadge:"MED",
+    photo:"",
+    bio:[["Edad","21"],["Altura","1,78 m"],["Pie","Derecho"],["Posición","Mediocampista"],["Dorsal","5"],["Valor","€1,8M"]],
+    attrs:[["Pase",78],["Recuperación",80],["Visión de juego",76],["Resistencia",82],["Marca",75]],
+    traj:[["2026","Club actual (COL)"],["2024","Divisiones menores"]],
+    highlights:"#"
+  }
+};
+
+function openFicha(key){
+  const p = PLAYERS[key]; if(!p) return;
+  document.getElementById('fFirst').textContent=p.first;
+  document.getElementById('fLast').textContent=p.last;
+  document.getElementById('fFullname').textContent=p.fullname;
+  document.getElementById('fFlags').textContent=p.flags;
+  document.getElementById('fClub').textContent=p.club;
+  document.getElementById('fOvr').textContent=p.ovr;
+  document.getElementById('fPosBadge').textContent=p.posBadge;
+  document.getElementById('fHighlights').href=p.highlights||'#';
+
+  // foto
+  const ph=document.getElementById('fichaPhoto');
+  const phPh=document.getElementById('fichaPhotoPh');
+  if(p.photo){ph.style.backgroundImage="url('"+p.photo+"')";phPh.textContent="";}
+  else{ph.style.backgroundImage="linear-gradient(160deg,#1c1c24,#0a0a0d)";phPh.textContent="assets/"+key+".jpg";}
+
+  // bio
+  const bio=document.getElementById('fBio');bio.innerHTML="";
+  p.bio.forEach(([k,v])=>{bio.innerHTML+=`<div><div class="k">${k}</div><div class="v">${v}</div></div>`;});
+
+  // atributos
+  const at=document.getElementById('fAttrs');at.innerHTML="";
+  p.attrs.forEach(([k,v])=>{
+    at.innerHTML+=`<div class="attr"><div class="attr-top"><span>${k}</span><span class="av">${v}</span></div><div class="attr-bar"><div class="attr-fill" data-v="${v}"></div></div></div>`;
+  });
+
+  // trayectoria
+  const tr=document.getElementById('fTraj');tr.innerHTML="";
+  p.traj.forEach(([y,c])=>{tr.innerHTML+=`<li><span class="yr">${y}</span><span class="cl">${c}</span></li>`;});
+
+  document.getElementById('fichaOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  // animar barras
+  setTimeout(()=>{document.querySelectorAll('.attr-fill').forEach(f=>{f.style.width=f.dataset.v+'%';});},120);
+}
+function closeFicha(){
+  document.getElementById('fichaOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFicha();});
+
+/* CURSOR */
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+function bindCursor(){document.querySelectorAll('a,button,.pcard,.slider-dot,.service-item-header,.deal-card,.ficha-close').forEach(el=>{el.addEventListener('mouseenter',()=>{cursor.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cursor.classList.remove('hover');ring.classList.remove('hover');});});}
+bindCursor();
+
+/* SLIDER */
+let currentSlide=0;
+const slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.slider-dot'),numEl=document.getElementById('slideNum');
+let autoTimer;
+function goSlide(n){
+  slides[currentSlide].classList.remove('active');slides[currentSlide].classList.add('prev');dots[currentSlide].classList.remove('active');
+  const prev=currentSlide;currentSlide=n;
+  slides[currentSlide].classList.remove('prev');slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active');
+  numEl.textContent=String(currentSlide+1).padStart(2,'0');
+  setTimeout(()=>slides[prev].classList.remove('prev'),1000);resetAuto();
+}
+function nextSlide(){goSlide((currentSlide+1)%slides.length);}
+function resetAuto(){clearInterval(autoTimer);autoTimer=setInterval(nextSlide,6000);}
+resetAuto();
+
+/* REVEAL */
+const revealObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revealObs.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal-up').forEach(el=>revealObs.observe(el));
+
+/* ACCORDION */
+function toggleService(item){const isOpen=item.classList.contains('open');document.querySelectorAll('.service-item.open').forEach(el=>el.classList.remove('open'));if(!isOpen)item.classList.add('open');}
+
+/* FORM */
+function submitForm(e){e.preventDefault();const btn=document.getElementById('submitBtn');btn.textContent='✅ ENVIADO — TE CONTACTAMOS PRONTO';btn.style.opacity='0.6';btn.disabled=true;return false;}
+
+/* SMOOTH NAV */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const href=a.getAttribute('href');if(href==='#')return;const t=document.querySelector(href);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
+</script>
+</body>
+</html>
