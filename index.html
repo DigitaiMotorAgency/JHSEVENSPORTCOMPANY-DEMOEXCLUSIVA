@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JH Seven Sports Company</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -33,9 +34,11 @@ body{
 .cursor-ring.hover{width:64px;height:64px;border-color:var(--red)}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 48px;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:flex;justify-content:space-between;align-items:center}
+.nav-right{mix-blend-mode:difference}
 .nav-logo{font-family:'Anton',sans-serif;font-size:22px;letter-spacing:3px;color:var(--white);text-decoration:none}
 .nav-logo span{color:var(--red)}
+.nav-logo img{height:46px;width:46px;border-radius:50%;object-fit:cover;display:block}
 .nav-right{display:flex;gap:40px;align-items:center}
 .nav-link{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--white);text-decoration:none;font-weight:400;transition:opacity 0.2s}
 .nav-link:hover{opacity:0.5}
@@ -103,6 +106,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 48px;display:fl
 .about-stat-n sup{font-size:32px;color:rgba(248,246,241,0.5)}
 .about-stat-l{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.6);font-weight:400}
 
+/* FOUNDER BAND */
+.founder{position:relative;min-height:90vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--black)}
+.founder-img{position:absolute;inset:0;background-size:cover;background-position:center 20%;transform:scale(1.05);filter:grayscale(15%)}
+.founder-img::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,11,0.92) 0%,rgba(11,11,11,0.55) 45%,rgba(11,11,11,0.15) 100%)}
+.founder-content{position:relative;z-index:2;padding:80px 48px;max-width:680px}
+.founder-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:18px}
+.founder-name{font-family:'Anton',sans-serif;font-size:clamp(44px,6vw,86px);line-height:0.9;letter-spacing:-1px;color:#fff;margin-bottom:20px}
+.founder-name .red{color:var(--red)}
+.founder-body{font-size:16px;color:rgba(248,246,241,0.7);line-height:1.85;font-weight:300;max-width:480px;margin-bottom:24px}
+.founder-tags{display:flex;flex-wrap:wrap;gap:10px}
+.founder-tag{border:1px solid rgba(248,246,241,0.2);padding:8px 16px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(248,246,241,0.7)}
+
+/* TEAM */
+.team{background:var(--white);padding:120px 48px}
+.team-header{margin-bottom:60px}
+.team-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:16px}
+.team-title{font-family:'Anton',sans-serif;font-size:clamp(40px,5.5vw,80px);line-height:0.9;color:var(--black);letter-spacing:-1px}
+.team-title .outline-dark{color:transparent;-webkit-text-stroke:2px var(--black)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.team-card{background:var(--black);padding:44px 32px;position:relative;overflow:hidden;transition:transform .4s}
+.team-card:hover{transform:translateY(-8px)}
+.team-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(0.77,0,0.18,1)}
+.team-card:hover::after{transform:scaleX(1)}
+.team-role{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:16px;display:inline-block;padding:5px 12px;border:1px solid rgba(200,16,46,0.3);background:rgba(200,16,46,0.12)}
+.team-name{font-family:'Anton',sans-serif;font-size:28px;line-height:0.95;color:#fff;margin-bottom:10px}
+.team-desc{font-size:13px;color:rgba(248,246,241,0.45);line-height:1.7;font-weight:300;border-top:1px solid rgba(248,246,241,0.07);padding-top:14px;margin-top:14px}
+.team-ig{display:inline-block;margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:rgba(248,246,241,0.6);text-decoration:none;transition:color .3s}
+.team-ig:hover{color:#fff}
+
 /* PLAYERS GRID */
 .players{background:var(--black);padding:120px 0 60px}
 .players-header{padding:0 48px 60px;display:flex;justify-content:space-between;align-items:flex-end}
@@ -144,10 +176,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 48px;display:fl
 .pcard-viewhint{position:absolute;top:24px;left:32px;z-index:4;display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;opacity:0;transform:translateX(-10px);transition:opacity .4s,transform .4s}
 .pcard-viewhint .badge{width:26px;height:26px;border:1px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
 .pcard:hover .pcard-viewhint{opacity:1;transform:translateX(0)}
-.pcard-bg.ya{background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80'),linear-gradient(135deg,#1a1a2e,#16213e)}
-.pcard-bg.jd{background-image:url('https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=800&q=80'),linear-gradient(135deg,#2d1b00,#1a0a0a)}
-.pcard-bg.jm{background-image:url('https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800&q=80'),linear-gradient(135deg,#0a2400,#001a0a)}
-.pcard-bg.jb{background-image:url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=800&q=80'),linear-gradient(135deg,#1a1a1a,#2d2d2d)}
+.pcard-bg.ya{background-image:url('assets/representante_asprilla.jpg')}
+.pcard-bg.jd{background-image:url('assets/duran-festejo.jpg');background-position:center 30%}
+.pcard-bg.jm{background-image:url('assets/calimartinez.jpg')}
+.pcard-bg.jb{background-image:url('assets/asprilla.jpg')}
 .pcard-bg.jdz{background-image:linear-gradient(135deg,#1a1a2e,#0a0a14)}
 .pcard-bg.ce{background-image:linear-gradient(135deg,#002400,#0a1a0a)}
 .pcard-bg.dm{background-image:linear-gradient(135deg,#241400,#1a0a00)}
@@ -284,7 +316,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:28px 48px;display:fl
 
 /* FOOTER */
 footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);padding:48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.footer-logo{font-family:'Anton',sans-serif;font-size:20px;letter-spacing:4px;color:rgba(248,246,241,0.25)}
+.footer-logo{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:3px;color:rgba(248,246,241,0.5);display:flex;align-items:center}
 .footer-logo span{color:var(--red)}
 .footer-copy{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;color:rgba(248,246,241,0.2);text-transform:uppercase}
 .footer-links{display:flex;gap:32px}
@@ -312,6 +344,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
   .pcard:nth-child(n) .pcard-inner{padding-top:120%}
   .pcard:nth-child(1) .pcard-inner,.pcard:nth-child(2) .pcard-inner,.pcard:nth-child(7) .pcard-inner{padding-top:75%}
   .deals-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr}
   .services-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
   .players-header{flex-direction:column;align-items:flex-start;gap:16px}
@@ -340,9 +373,10 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
 <div class="cursor-ring" id="cursorRing"></div>
 
 <nav>
-  <a href="#" class="nav-logo">JH<span>7</span></a>
+  <a href="#" class="nav-logo"><img src="assets/logo.png" alt="JH Seven Sports Company"></a>
   <div class="nav-right">
     <a href="#jugadores" class="nav-link">Jugadores</a>
+    <a href="#equipo" class="nav-link">Equipo</a>
     <a href="#servicios" class="nav-link">Servicios</a>
     <a href="#contacto" class="nav-link">Contacto</a>
   </div>
@@ -351,35 +385,35 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
 <!-- HERO SLIDER -->
 <section class="hero" id="inicio">
   <div class="slide active" id="slide-0">
-    <div class="slide-img ya" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1600&q=85&fit=crop&crop=faces');background-position:center top;"></div>
+    <div class="slide-img ya" style="background-image:url('assets/asprilla.jpg');background-position:center 25%;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">🇨🇴 Colombia → 🇹🇷 Turquía</div>
-      <div class="slide-name"><span>YASER</span><br><span class="surname">ASPRILLA</span></div>
+      <div class="slide-eyebrow">🇨🇴 Colombia → 🇪🇸 LaLiga / 🇹🇷 Galatasaray</div>
+      <div class="slide-name"><span>YÁSER</span><br><span class="surname">ASPRILLA</span></div>
       <div class="slide-meta">
-        <span class="slide-club">Galatasaray SK</span>
+        <span class="slide-club">Galatasaray · cedido de Girona</span>
         <span class="slide-pos">Extremo</span>
-        <span class="slide-title-flag">🏆 Campeón Süperlig</span>
+        <span class="slide-title-flag">⭐ Internacional con Colombia</span>
       </div>
       <div class="slide-cta"><button onclick="openFicha('asprilla')">Ver ficha técnica →</button></div>
     </div>
   </div>
   <div class="slide" id="slide-1">
-    <div class="slide-img" style="background-image:url('https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=1600&q=85&fit=crop&crop=faces');background-position:center 20%;"></div>
+    <div class="slide-img" style="background-image:url('assets/duran-festejo.jpg');background-position:center 25%;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
-      <div class="slide-eyebrow">🇨🇴 Colombia → 🇷🇺 Rusia</div>
-      <div class="slide-name"><span>JADER</span><br><span class="surname">DURÁN</span></div>
+      <div class="slide-eyebrow">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier → 🇸🇦 Saudi Pro League · €77M</div>
+      <div class="slide-name"><span>JHON</span><br><span class="surname">DURÁN</span></div>
       <div class="slide-meta">
-        <span class="slide-club">FC Zenit / Fenerbahçe</span>
+        <span class="slide-club">Zenit · cedido de Al-Nassr</span>
         <span class="slide-pos">Delantero</span>
-        <span class="slide-title-flag">🏅 Süper Kupa</span>
+        <span class="slide-title-flag">💎 Traspaso récord €77M</span>
       </div>
       <div class="slide-cta"><button onclick="openFicha('duran')">Ver ficha técnica →</button></div>
     </div>
   </div>
   <div class="slide" id="slide-2">
-    <div class="slide-img" style="background-image:url('https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=1600&q=85&fit=crop&crop=faces');background-position:center 20%;"></div>
+    <div class="slide-img" style="background-image:url('assets/calimartinez.jpg');background-position:center 15%;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <div class="slide-eyebrow">🇨🇴 Colombia — Deal Done ✅</div>
@@ -406,8 +440,8 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
 <div class="tagline-section">
   <div class="tagline-text reveal-up">DESDE LA<br><span class="outline">BASE</span> HASTA<br>LO <span class="red">PROFESIONAL.</span></div>
   <div class="tagline-marquee"><div class="tagline-marquee-inner">
-    <div class="tagline-marquee-item">Colombia</div><div class="tagline-marquee-item">Turquía</div><div class="tagline-marquee-item">Rusia</div><div class="tagline-marquee-item">Abu Dhabi</div><div class="tagline-marquee-item">Brasil</div><div class="tagline-marquee-item">Agente FIFA</div><div class="tagline-marquee-item">Deal Done</div><div class="tagline-marquee-item">Campeones</div>
-    <div class="tagline-marquee-item">Colombia</div><div class="tagline-marquee-item">Turquía</div><div class="tagline-marquee-item">Rusia</div><div class="tagline-marquee-item">Abu Dhabi</div><div class="tagline-marquee-item">Brasil</div><div class="tagline-marquee-item">Agente FIFA</div><div class="tagline-marquee-item">Deal Done</div><div class="tagline-marquee-item">Campeones</div>
+    <div class="tagline-marquee-item">Premier League</div><div class="tagline-marquee-item">LaLiga</div><div class="tagline-marquee-item">Süper Lig</div><div class="tagline-marquee-item">Saudi Pro League</div><div class="tagline-marquee-item">Ekstraklasa</div><div class="tagline-marquee-item">Agente FIFA</div><div class="tagline-marquee-item">Deal Done</div><div class="tagline-marquee-item">€77M</div>
+    <div class="tagline-marquee-item">Premier League</div><div class="tagline-marquee-item">LaLiga</div><div class="tagline-marquee-item">Süper Lig</div><div class="tagline-marquee-item">Saudi Pro League</div><div class="tagline-marquee-item">Ekstraklasa</div><div class="tagline-marquee-item">Agente FIFA</div><div class="tagline-marquee-item">Deal Done</div><div class="tagline-marquee-item">€77M</div>
   </div></div>
 </div>
 
@@ -416,14 +450,56 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
   <div class="about-left reveal-up">
     <div class="about-eyebrow">JH Seven Sports Company</div>
     <h2 class="about-title">TU CARRERA<br>ES<br>NUESTRA<br>MISIÓN.</h2>
-    <p class="about-body">Somos una agencia de representación deportiva <strong>especializada en fútbol colombiano</strong> con proyección global. Negociamos en los mercados más exigentes — Turquía, Rusia, Emiratos Árabes, Sudamérica — siempre al lado del jugador.</p>
+    <p class="about-body">Somos una agencia <strong>boutique de representación</strong> con sede en Medellín, Colombia, fundada en 2022. Movemos talento sudamericano hacia las grandes ligas de Europa, Medio Oriente y Asia — Premier League, LaLiga, Süper Lig, Saudi Pro League y Ekstraklasa. Pocos jugadores, máxima dedicación, traspasos que cambian carreras.</p>
     <blockquote class="about-quote">"Asesoramos y acompañamos al jugador de fútbol en su proceso desde la base a lo profesional."</blockquote>
   </div>
   <div class="about-right">
-    <div class="about-stat"><div class="about-stat-n"><sup>+</sup>19</div><div class="about-stat-l">Mil Seguidores</div></div>
-    <div class="about-stat"><div class="about-stat-n">6</div><div class="about-stat-l">Países Activos</div></div>
-    <div class="about-stat"><div class="about-stat-n">4</div><div class="about-stat-l">Títulos Ganados</div></div>
-    <div class="about-stat"><div class="about-stat-n"><sup>+</sup>15</div><div class="about-stat-l">Deals Cerrados</div></div>
+    <div class="about-stat"><div class="about-stat-n">€55<sup>M</sup></div><div class="about-stat-l">Valor de cartera</div></div>
+    <div class="about-stat"><div class="about-stat-n">€77<sup>M</sup></div><div class="about-stat-l">Récord en un traspaso</div></div>
+    <div class="about-stat"><div class="about-stat-n"><sup>+</sup>7</div><div class="about-stat-l">Traspasos cerrados</div></div>
+    <div class="about-stat"><div class="about-stat-n">5</div><div class="about-stat-l">Países de operación</div></div>
+  </div>
+</section>
+
+<!-- FOUNDER BAND -->
+<section class="founder">
+  <div class="founder-img" style="background-image:url('assets/representantecool.jpg')"></div>
+  <div class="founder-content reveal-up">
+    <div class="founder-eyebrow">El hombre detrás de los fichajes</div>
+    <h2 class="founder-name">DONDE OTROS<br>VEN UN JUGADOR,<br>NOSOTROS VEMOS<br>UNA <span class="red">CARRERA.</span></h2>
+    <p class="founder-body">Presencia en los despachos que importan. Negociaciones en Estambul, Abu Dhabi, San Petersburgo y Cali. JH Seven está donde se cierran los grandes acuerdos del fútbol mundial — y siempre con el jugador en el centro.</p>
+    <div class="founder-tags">
+      <span class="founder-tag">Agente FIFA</span>
+      <span class="founder-tag">Red Internacional</span>
+      <span class="founder-tag">Deal Closer</span>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="equipo">
+  <div class="team-header reveal-up">
+    <div class="team-eyebrow">Quiénes lo hacen posible</div>
+    <h2 class="team-title">EL <span class="outline-dark">EQUIPO.</span></h2>
+  </div>
+  <div class="team-grid">
+    <div class="team-card reveal-up">
+      <span class="team-role">Fundador / Principal</span>
+      <div class="team-name">Jonathan Herrera Carvajal</div>
+      <div class="team-desc">Cabeza de JH Seven Sports Company. Lidera las negociaciones y la estrategia de carrera de los representados, presente en los grandes acuerdos de la agencia en Europa y Medio Oriente.</div>
+    </div>
+    <div class="team-card reveal-up" style="transition-delay:0.1s">
+      <span class="team-role">Agente FIFA Licenciado</span>
+      <div class="team-name">Iván Reyes</div>
+      <div class="team-desc">Agente con licencia FIFA (ID 202401-5739). Garantiza que cada operación se cierre bajo la normativa internacional vigente, con seguridad jurídica para el jugador.</div>
+      <a href="https://instagram.com/agentereyes" target="_blank" class="team-ig">@agentereyes →</a>
+    </div>
+    <div class="team-card reveal-up" style="transition-delay:0.2s">
+      <span class="team-role">Scouting</span>
+      <div class="team-name">Jacobo Izquierdo</div>
+      <div class="team-desc">Responsable de detección de talento. Identifica jóvenes promesas con potencial real de proyección internacional desde Sudamérica hacia Europa.</div>
+      <a href="https://instagram.com/jacobo_scouting" target="_blank" class="team-ig">@jacobo_scouting →</a>
+    </div>
   </div>
 </section>
 
@@ -431,7 +507,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
 <section class="players" id="jugadores">
   <div class="players-header reveal-up">
     <h2 class="players-title">NUESTROS<br><span class="outline">JUGADORES</span></h2>
-    <p class="players-subtitle">Colombianos compitiendo en las ligas más exigentes del mundo. Tocá una ficha para ver el perfil completo.</p>
+    <p class="players-subtitle">Talento sudamericano compitiendo en Premier League, LaLiga, Süper Lig y más. Tocá una ficha para ver el perfil completo.</p>
   </div>
   <div class="players-masonry">
     <div class="pcard" onclick="openFicha('asprilla')">
@@ -487,34 +563,34 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
         <div class="pcard-bg jdz"></div><div class="pcard-overlay"></div><div class="pcard-num">7</div>
         <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
         <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴</span>
+          <span class="pcard-flag">🇨🇴 🇵🇱</span>
           <div class="pcard-name"><span class="fam">Jesús</span>DÍAZ</div>
-          <div class="pcard-club">En activo</div>
-          <div class="pcard-trophy">⚽ Representado</div>
+          <div class="pcard-club">Zagłębie Lubin — Polonia</div>
+          <div class="pcard-trophy">⚽ Ekstraklasa</div>
         </div>
       </div>
     </div>
-    <div class="pcard" onclick="openFicha('caio')">
+    <div class="pcard" onclick="openFicha('garcia')">
       <div class="pcard-inner">
-        <div class="pcard-bg ce"></div><div class="pcard-overlay"></div><div class="pcard-num">11</div>
+        <div class="pcard-bg ce"></div><div class="pcard-overlay"></div><div class="pcard-num">14</div>
         <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
         <div class="pcard-content">
-          <span class="pcard-flag">🇧🇷</span>
-          <div class="pcard-name"><span class="fam">Caio</span>EDUARDO</div>
-          <div class="pcard-club">En activo</div>
-          <div class="pcard-trophy">⚽ Representado</div>
+          <span class="pcard-flag">🇪🇨</span>
+          <div class="pcard-name"><span class="fam">Christian</span>GARCÍA</div>
+          <div class="pcard-club">Independiente Juniors</div>
+          <div class="pcard-trophy">🌎 Ecuador U23</div>
         </div>
       </div>
     </div>
-    <div class="pcard" onclick="openFicha('danovis')">
+    <div class="pcard" onclick="openFicha('torres')">
       <div class="pcard-inner">
-        <div class="pcard-bg dm"></div><div class="pcard-overlay"></div><div class="pcard-num">5</div>
+        <div class="pcard-bg dm"></div><div class="pcard-overlay"></div><div class="pcard-num">9</div>
         <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
         <div class="pcard-content">
           <span class="pcard-flag">🇨🇴</span>
-          <div class="pcard-name"><span class="fam">Danovis</span>MARTÍNEZ</div>
-          <div class="pcard-club">En activo</div>
-          <div class="pcard-trophy">⚽ Representado</div>
+          <div class="pcard-name"><span class="fam">Liberman</span>TORRES</div>
+          <div class="pcard-club">Manta FC — Ecuador</div>
+          <div class="pcard-trophy">⚽ Atacante</div>
         </div>
       </div>
     </div>
@@ -565,10 +641,10 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <p class="deals-sub">Transfers y renovaciones cerradas en cuatro continentes.</p>
   </div>
   <div class="deals-grid">
-    <div class="deal-card reveal-up"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 → 🇹🇷</div><div class="deal-player-name">Yaser Asprilla</div><div class="deal-club">Galatasaray SK — Süperlig</div><div class="deal-desc">Nuestro jugador se proclamó CAMPEÓN de la Süperlig de Turquía. El negocio cerrado con uno de los clubes más grandes de Europa.</div></div>
-    <div class="deal-card reveal-up" style="transition-delay:0.1s"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 → 🇷🇺</div><div class="deal-player-name">Jader Durán</div><div class="deal-club">FC Zenit — San Petersburgo</div><div class="deal-desc">Nuestro goleador llega al club más grande de Rusia. Negociación cerrada en Abu Dhabi. Vamos a por todo.</div></div>
-    <div class="deal-card reveal-up" style="transition-delay:0.2s"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 🏟️</div><div class="deal-player-name">Joahn Martínez</div><div class="deal-club">Deportivo Cali — 2029</div><div class="deal-desc">Renovación hasta 2029. Un jugador formado, una carrera construida. Deal gestionado íntegramente por JH Seven.</div></div>
-    <div class="deal-card reveal-up" style="transition-delay:0.3s"><div class="deal-badge">Campeón</div><div class="deal-flags">🇨🇴 → 🇹🇷</div><div class="deal-player-name">Jader Durán</div><div class="deal-club">Fenerbahçe — Süper Kupa</div><div class="deal-desc">Campeón de la Supercopa de Turquía. Cada título de nuestro jugador es también nuestro título.</div></div>
+    <div class="deal-card reveal-up"><div class="deal-badge">€77M · Récord</div><div class="deal-flags">🏴󠁧󠁢󠁥󠁮󠁧󠁿 → 🇸🇦</div><div class="deal-player-name">Jhon Durán</div><div class="deal-club">Aston Villa → Al-Nassr · 2025</div><div class="deal-desc">El traspaso más grande de la agencia: 77 millones de euros desde la Premier League a la Saudi Pro League. Una operación que cambió la categoría de mercado del jugador.</div></div>
+    <div class="deal-card reveal-up" style="transition-delay:0.1s"><div class="deal-badge">€18M</div><div class="deal-flags">🏴󠁧󠁢󠁥󠁮󠁧󠁿 → 🇪🇸</div><div class="deal-player-name">Yáser Asprilla</div><div class="deal-club">Watford → Girona · 2024</div><div class="deal-desc">Salto a LaLiga por 18 millones de euros. Talento colombiano colocado en una de las cinco grandes ligas de Europa.</div></div>
+    <div class="deal-card reveal-up" style="transition-delay:0.2s"><div class="deal-badge">€29M</div><div class="deal-flags">🇺🇸 → 🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div class="deal-player-name">Jhon Durán</div><div class="deal-club">Chicago Fire → Aston Villa · 2023</div><div class="deal-desc">El primer gran salto: de la MLS a la Premier League por 29 millones. El comienzo de una carrera proyectada a la élite.</div></div>
+    <div class="deal-card reveal-up" style="transition-delay:0.3s"><div class="deal-badge">Deal Done</div><div class="deal-flags">🇨🇴 → 🇵🇱</div><div class="deal-player-name">Jesús Díaz</div><div class="deal-club">Raków → Zagłębie Lubin · 2025</div><div class="deal-desc">Colocación en la Ekstraklasa polaca con opción de compra. Apertura de un nuevo mercado europeo para la agencia.</div></div>
   </div>
 </section>
 
@@ -596,27 +672,28 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="reveal-up">
       <div class="contact-eyebrow">Representación</div>
       <h2 class="contact-title">HABLEMOS<br>DE TU<br>FUTURO.</h2>
-      <a href="https://instagram.com/jhsevensportscompany" target="_blank" class="contact-ig">📸 @jhsevensportscompany</a>
-      <p class="contact-note">Cada campeón empezó siendo un sueño. Si tienes el talento, nosotros ponemos el camino. Envíanos tu perfil y evaluamos tu caso personalmente.</p>
+      <a href="mailto:[CORREO INSTITUCIONAL]" class="contact-ig">✉ [CORREO INSTITUCIONAL]</a>
+      <p class="contact-note">Para jugadores, clubes y consultas profesionales. Completá el formulario y nos pondremos en contacto a la brevedad. También podés escribirnos directamente a nuestro correo institucional.</p>
+      <a href="https://instagram.com/jhsevensportscompany" target="_blank" class="contact-ig" style="margin-top:4px">📸 @jhsevensportscompany</a>
     </div>
     <form class="contact-form reveal-up" style="transition-delay:0.15s" onsubmit="return submitForm(event)">
       <div class="form-row">
-        <div class="form-g"><label>Nombre del jugador</label><input type="text" placeholder="Tu nombre completo"></div>
-        <div class="form-g"><label>Edad</label><input type="number" placeholder="Años" min="14" max="45"></div>
+        <div class="form-g"><label>Nombre completo</label><input id="cName" type="text" placeholder="Nombre y apellido"></div>
+        <div class="form-g"><label>Tipo de contacto</label><select id="cType"><option value="">Seleccioná</option><option>Soy jugador</option><option>Represento a un club</option><option>Director deportivo</option><option>Prensa / Otro</option></select></div>
       </div>
-      <div class="form-g"><label>Posición</label><select><option value="">Selecciona tu posición</option><option>Portero</option><option>Defensa Central</option><option>Lateral Derecho / Izquierdo</option><option>Mediocampista Defensivo</option><option>Mediocampista Creativo</option><option>Extremo / Alero</option><option>Delantero Centro</option></select></div>
-      <div class="form-g"><label>Club o categoría actual</label><input type="text" placeholder="¿Dónde juegas ahora?"></div>
-      <div class="form-g"><label>Tu historia</label><textarea rows="4" placeholder="Cuéntanos sobre tu carrera y tus objetivos..."></textarea></div>
-      <button type="submit" class="btn-submit" id="submitBtn">QUIERO REPRESENTACIÓN →</button>
+      <div class="form-g"><label>Email de contacto</label><input id="cEmail" type="email" placeholder="tucorreo@email.com"></div>
+      <div class="form-g"><label>Posición / Club actual</label><input id="cClub" type="text" placeholder="Ej: Delantero — Club actual"></div>
+      <div class="form-g"><label>Mensaje</label><textarea id="cMsg" rows="4" placeholder="Contanos en qué podemos ayudarte..."></textarea></div>
+      <button type="submit" class="btn-submit" id="submitBtn">ENVIAR CONSULTA →</button>
     </form>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">JH<span>7</span> SPORTS COMPANY</div>
-  <div class="footer-copy">© 2025 JH Seven Sports Company — Todos los derechos reservados</div>
+  <div class="footer-logo"><img src="assets/logo.png" alt="JH Seven" style="height:48px;width:48px;border-radius:50%;object-fit:cover;vertical-align:middle;margin-right:12px">JH SEVEN SPORTS COMPANY</div>
+  <div class="footer-copy">© 2026 JH Seven Sport Company S.A.S. · Medellín, Colombia · NIT 901482298-3</div>
   <div class="footer-links">
-    <a href="#nosotros">Nosotros</a><a href="#jugadores">Jugadores</a><a href="#contacto">Contacto</a><a href="https://instagram.com/jhsevensportscompany" target="_blank">Instagram</a>
+    <a href="#nosotros">Nosotros</a><a href="#equipo">Equipo</a><a href="#jugadores">Jugadores</a><a href="#contacto">Contacto</a><a href="https://instagram.com/jhsevensportscompany" target="_blank">Instagram</a>
   </div>
 </footer>
 
@@ -627,73 +704,73 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
    La FOTO: reemplazá "photo" por la ruta real, ej 'assets/asprilla.jpg' */
 const PLAYERS = {
   asprilla:{
-    first:"Yaser", last:"Asprilla", fullname:"Yáser Asprilla Mosquera",
-    flags:"🇨🇴 🇹🇷", club:"Galatasaray SK · Turquía",
-    ovr:"84", posBadge:"EXT",
-    photo:"", /* -> 'assets/asprilla.jpg' */
-    bio:[["Edad","22"],["Altura","1,78 m"],["Pie","Derecho"],["Posición","Extremo / Mediapunta"],["Dorsal","10"],["Valor","€18M"]],
+    first:"Yáser", last:"Asprilla", fullname:"Yáser Asprilla Mosquera",
+    flags:"🇨🇴 🇹🇷", club:"Galatasaray · Turquía (cedido de Girona)",
+    ovr:"83", posBadge:"EXT",
+    photo:"assets/representante_asprilla.jpg", /* representante + Asprilla en Galatasaray */
+    bio:[["Nacimiento","19.11.2003"],["Posición","Extremo / Mediapunta"],["Selección","Colombia 🇨🇴"],["Club actual","Galatasaray"],["Última venta","€18M"],["Pasaporte","COL"]],
     attrs:[["Regate",88],["Velocidad",86],["Visión de juego",84],["Pase",82],["Tiro",78]],
-    traj:[["2025","Galatasaray (TUR)"],["2023","Watford FC (ENG)"],["2021","Envigado FC (COL)"]],
+    traj:[["2026","Galatasaray (TUR) — cedido"],["2024","Girona FC (ESP) — €18M"],["2022","Watford FC (ENG)"],["2021","Envigado FC (COL)"]],
     highlights:"#"
   },
   duran:{
-    first:"Jader", last:"Durán", fullname:"Jhon Jáder Durán",
-    flags:"🇨🇴 🇷🇺 🇹🇷", club:"FC Zenit · Rusia",
-    ovr:"83", posBadge:"DC",
-    photo:"",
-    bio:[["Edad","21"],["Altura","1,85 m"],["Pie","Derecho"],["Posición","Delantero Centro"],["Dorsal","9"],["Valor","€22M"]],
+    first:"Jhon", last:"Durán", fullname:"Jhon Jáder Durán Palacio",
+    flags:"🇨🇴 🇷🇺", club:"Zenit San Petersburgo · Rusia (cedido de Al-Nassr)",
+    ovr:"85", posBadge:"DC",
+    photo:"assets/duran-cristiano.jpg", /* Durán abrazado con Cristiano Ronaldo en Al-Nassr */
+    bio:[["Nacimiento","13.12.2003"],["Posición","Delantero Centro"],["Selección","Colombia 🇨🇴"],["Club actual","Zenit (cedido)"],["Récord venta","€77M"],["Pasaporte","COL"]],
     attrs:[["Definición",87],["Potencia",89],["Velocidad",85],["Juego aéreo",82],["Remate lejano",84]],
-    traj:[["2025","FC Zenit (RUS)"],["2025","Fenerbahçe (TUR)"],["2024","Aston Villa (ENG)"],["2022","Chicago Fire (USA)"]],
+    traj:[["2026","Zenit (RUS) — cedido"],["2025","Fenerbahçe (TUR) — cedido"],["2025","Al-Nassr (KSA) — €77M"],["2023","Aston Villa (ENG) — €29M"],["2022","Chicago Fire (USA)"]],
     highlights:"#"
   },
   martinez:{
     first:"Joahn", last:"Martínez", fullname:"Joahn Martínez",
     flags:"🇨🇴", club:"Deportivo Cali · Colombia",
     ovr:"76", posBadge:"MC",
-    photo:"",
-    bio:[["Edad","19"],["Altura","1,74 m"],["Pie","Izquierdo"],["Posición","Mediocampista"],["Dorsal","8"],["Valor","€3M"]],
+    photo:"assets/calimartinez.jpg",
+    bio:[["Posición","Mediocampista"],["Selección","Colombia 🇨🇴"],["Club actual","Deportivo Cali"],["Contrato","2029"],["Pasaporte","COL"],["Estado","Renovado"]],
     attrs:[["Pase",82],["Visión de juego",80],["Regate",78],["Recuperación",75],["Resistencia",84]],
     traj:[["2025","Deportivo Cali — Renovación 2029"],["2023","Deportivo Cali (COL)"],["2021","Divisiones menores"]],
     highlights:"#"
   },
   bonilla:{
-    first:"Juan D.", last:"Bonilla", fullname:"Juan David Bonilla",
-    flags:"🇨🇴", club:"En activo · Colombia",
+    first:"Juan David", last:"Bonilla", fullname:"Juan David Bonilla",
+    flags:"🇨🇴", club:"Joven promesa · Colombia",
     ovr:"72", posBadge:"DEF",
     photo:"",
-    bio:[["Edad","20"],["Altura","1,83 m"],["Pie","Derecho"],["Posición","Defensa Central"],["Dorsal","4"],["Valor","€1,5M"]],
+    bio:[["Nacimiento","18.01.2006"],["Posición","Defensa Central"],["Selección","Colombia 🇨🇴"],["Categoría","Sub-20"],["Pasaporte","COL"],["Perfil","Alto potencial"]],
     attrs:[["Marca",80],["Juego aéreo",82],["Anticipación",78],["Fuerza",81],["Salida de balón",74]],
-    traj:[["2024","Club actual (COL)"],["2022","Categorías formativas"]],
+    traj:[["2024","Proyección profesional"],["2022","Categorías formativas"]],
     highlights:"#"
   },
   diaz:{
     first:"Jesús", last:"Díaz", fullname:"Jesús Díaz",
-    flags:"🇨🇴", club:"En activo · Colombia",
+    flags:"🇨🇴 🇵🇱", club:"Zagłębie Lubin · Polonia",
     ovr:"75", posBadge:"EXT",
     photo:"",
-    bio:[["Edad","20"],["Altura","1,76 m"],["Pie","Derecho"],["Posición","Extremo"],["Dorsal","7"],["Valor","€2M"]],
-    attrs:[["Regate",80],["Velocidad",82],["Pase",76],["Tiro",74],["Resistencia",80]],
-    traj:[["2026","Club actual"],["2024","Divisiones menores"]],
+    bio:[["Nacimiento","21.05.1999"],["Posición","Extremo / Atacante"],["Selección","Colombia 🇨🇴"],["Club actual","Zagłębie Lubin"],["Liga","Ekstraklasa"],["Pasaporte","COL"]],
+    attrs:[["Regate",80],["Velocidad",82],["Pase",76],["Tiro",78],["Resistencia",80]],
+    traj:[["2025","Zagłębie Lubin (POL) — cedido"],["2024","Raków Częstochowa (POL) — cedido"],["2024","Stal Rzeszów (POL)"]],
     highlights:"#"
   },
-  caio:{
-    first:"Caio", last:"Eduardo", fullname:"Caio Eduardo",
-    flags:"🇧🇷", club:"En activo · Brasil",
-    ovr:"74", posBadge:"DC",
-    photo:"",
-    bio:[["Edad","19"],["Altura","1,80 m"],["Pie","Derecho"],["Posición","Delantero"],["Dorsal","11"],["Valor","€2,5M"]],
-    attrs:[["Definición",79],["Velocidad",80],["Regate",78],["Potencia",76],["Juego aéreo",73]],
-    traj:[["2026","Club actual (BRA)"],["2024","Base"]],
-    highlights:"#"
-  },
-  danovis:{
-    first:"Danovis", last:"Martínez", fullname:"Danovis Martínez",
-    flags:"🇨🇴", club:"En activo · Colombia",
+  garcia:{
+    first:"Christian", last:"García", fullname:"Christian García",
+    flags:"🇪🇨", club:"Independiente Juniors · Ecuador",
     ovr:"73", posBadge:"MED",
     photo:"",
-    bio:[["Edad","21"],["Altura","1,78 m"],["Pie","Derecho"],["Posición","Mediocampista"],["Dorsal","5"],["Valor","€1,8M"]],
-    attrs:[["Pase",78],["Recuperación",80],["Visión de juego",76],["Resistencia",82],["Marca",75]],
-    traj:[["2026","Club actual (COL)"],["2024","Divisiones menores"]],
+    bio:[["Nacimiento","06.07.2004"],["Posición","Mediocampista"],["Selección","Ecuador U23 🇪🇨"],["Club actual","Independiente Juniors"],["Desde","2023"],["Pasaporte","ECU"]],
+    attrs:[["Pase",78],["Visión de juego",77],["Regate",76],["Recuperación",78],["Resistencia",82]],
+    traj:[["2023","Independiente Juniors (ECU)"],["2021","Formación"]],
+    highlights:"#"
+  },
+  torres:{
+    first:"Liberman", last:"Torres", fullname:"Liberman Torres",
+    flags:"🇨🇴", club:"Manta FC · Ecuador",
+    ovr:"72", posBadge:"DEL",
+    photo:"",
+    bio:[["Nacimiento","16.05.2002"],["Posición","Atacante"],["Club actual","Manta FC"],["Desde","2025"],["Pasaporte","COL"],["Liga","Serie A ECU"]],
+    attrs:[["Definición",78],["Velocidad",80],["Regate",77],["Potencia",75],["Resistencia",80]],
+    traj:[["2025","Manta FC (ECU)"],["2023","Trayectoria previa"]],
     highlights:"#"
   }
 };
