@@ -143,40 +143,66 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:fl
 .players-subtitle{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.35);font-weight:400;max-width:280px;text-align:right;line-height:1.7}
 .players-masonry{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:0 48px}
 
-/* CARTA */
-.pcard{position:relative;cursor:none;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#1a1a22 0%,#0d0d12 100%);border:1px solid rgba(248,246,241,0.08);transition:transform .5s cubic-bezier(0.16,1,0.3,1),border-color .4s,box-shadow .4s;aspect-ratio:3/4.4}
-.pcard:hover{transform:translateY(-12px);border-color:rgba(200,16,46,0.5);box-shadow:0 30px 60px -25px rgba(0,0,0,.9),0 0 40px -20px rgba(200,16,46,.5)}
+/* CARTA PREMIUM */
+.pcard{position:relative;cursor:none;border-radius:16px;overflow:hidden;
+  background:
+    linear-gradient(160deg, rgba(200,16,46,0.14) 0%, transparent 38%),
+    linear-gradient(200deg,#212129 0%,#111116 45%,#0a0a0d 100%);
+  border:1px solid rgba(248,246,241,0.1);
+  transition:transform .5s cubic-bezier(0.16,1,0.3,1),border-color .4s,box-shadow .4s;
+  aspect-ratio:3/4.5;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.pcard::after{content:'';position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:16px;
+  box-shadow:inset 0 0 70px rgba(0,0,0,0.5)}
+.pcard:hover{transform:translateY(-12px);border-color:rgba(200,16,46,0.55);
+  box-shadow:0 35px 70px -25px rgba(0,0,0,.95),0 0 50px -18px rgba(200,16,46,.55)}
 .pcard-inner{position:absolute;inset:0}
+/* halo de luz detras del jugador */
+.pcard-inner::before{content:'';position:absolute;top:6%;left:50%;transform:translateX(-50%);
+  width:85%;height:55%;z-index:1;border-radius:50%;
+  background:radial-gradient(ellipse at center, rgba(200,16,46,0.25), transparent 65%);
+  filter:blur(10px);transition:opacity .5s;opacity:.65}
+.pcard:hover .pcard-inner::before{opacity:1}
 /* número dorsal gigante detrás */
-.pcard-num{position:absolute;top:-10px;right:6px;font-family:'Anton',sans-serif;font-size:170px;color:rgba(248,246,241,0.05);line-height:1;pointer-events:none;z-index:1;transition:color .4s}
-.pcard:hover .pcard-num{color:rgba(200,16,46,0.12)}
-/* foto recortada del jugador (PNG ideal) */
-.pcard-bg{position:absolute;left:0;right:0;top:0;height:74%;background-size:cover;background-position:center 18%;z-index:2;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);-webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 100%);mask-image:linear-gradient(to bottom,#000 72%,transparent 100%)}
-.pcard:hover .pcard-bg{transform:scale(1.06)}
-/* OVR + posición arriba izquierda estilo FIFA */
-.pcard-ovr{position:absolute;top:16px;left:16px;z-index:4;text-align:center;line-height:1}
-.pcard-ovr .n{font-family:'Anton',sans-serif;font-size:34px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
-.pcard-ovr .p{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:var(--red);font-weight:700;margin-top:-2px}
-.pcard-flag{position:absolute;top:18px;right:16px;z-index:4;font-size:20px}
+.pcard-num{position:absolute;top:-6px;right:4px;font-family:'Anton',sans-serif;font-size:165px;
+  color:rgba(248,246,241,0.06);line-height:1;pointer-events:none;z-index:1;transition:color .4s}
+.pcard:hover .pcard-num{color:rgba(200,16,46,0.16)}
+/* foto del jugador con tratamiento premium + fundido de bordes */
+.pcard-bg{position:absolute;left:0;right:0;top:0;height:72%;z-index:2;
+  background-size:cover;background-position:center 20%;
+  transition:transform 0.6s cubic-bezier(0.16,1,0.3,1),filter .5s;
+  filter:contrast(1.08) saturate(1.05) brightness(0.97);
+  -webkit-mask-image:radial-gradient(125% 105% at 50% 32%, #000 52%, transparent 90%);
+  mask-image:radial-gradient(125% 105% at 50% 32%, #000 52%, transparent 90%)}
+.pcard:hover .pcard-bg{transform:scale(1.05);filter:contrast(1.12) saturate(1.15) brightness(1)}
+/* capa que funde la foto con el fondo de la carta */
+.pcard-tint{position:absolute;left:0;right:0;top:0;height:72%;z-index:3;pointer-events:none;
+  background:linear-gradient(180deg, rgba(13,13,17,0) 38%, rgba(13,13,17,0.72) 78%, #0c0c10 100%)}
+/* OVR + posición estilo FIFA */
+.pcard-ovr{position:absolute;top:18px;left:18px;z-index:5;text-align:center;line-height:1}
+.pcard-ovr .n{font-family:'Anton',sans-serif;font-size:38px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.85)}
+.pcard-ovr .p{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:var(--red);font-weight:700;margin-top:-3px}
+.pcard-ovr::after{content:'';display:block;width:22px;height:2px;background:var(--red);margin:6px auto 0;box-shadow:0 0 8px rgba(200,16,46,.8)}
+.pcard-flag{position:absolute;top:20px;right:18px;z-index:5;font-size:22px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
 /* franja inferior con nombre + stats */
-.pcard-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 18px 18px;background:linear-gradient(to top,#0b0b0e 60%,transparent 100%)}
-.pcard-name{font-family:'Anton',sans-serif;font-size:22px;line-height:0.95;color:#fff;text-align:center;margin-bottom:2px}
-.pcard-name .fam{display:block;font-size:0.55em;color:rgba(248,246,241,0.5);letter-spacing:1px}
-.pcard-club{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:600;text-align:center;margin-bottom:12px}
+.pcard-foot{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:0 20px 20px}
+.pcard-name{font-family:'Anton',sans-serif;font-size:23px;line-height:0.95;color:#fff;text-align:center;margin-bottom:3px;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.pcard-name .fam{display:block;font-size:0.52em;color:var(--red);letter-spacing:2px;margin-bottom:2px}
+.pcard-club{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(248,246,241,0.5);font-weight:600;text-align:center;margin-bottom:14px}
 /* stats EA: 3 columnas x 2 filas */
-.pcard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 4px;border-top:1px solid rgba(248,246,241,0.1);padding-top:12px}
+.pcard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 4px;border-top:1px solid rgba(248,246,241,0.12);padding-top:13px;transition:opacity .3s}
 .pcard-stat{text-align:center}
-.pcard-stat .v{font-family:'Anton',sans-serif;font-size:17px;color:#fff;line-height:1}
-.pcard-stat .k{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:1px;color:rgba(248,246,241,0.45);font-weight:600;margin-top:1px}
+.pcard-stat .v{font-family:'Anton',sans-serif;font-size:18px;color:#fff;line-height:1}
+.pcard-stat .k{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:1px;color:rgba(248,246,241,0.45);font-weight:600;margin-top:2px}
 .pcard-stat .v.hi{color:var(--red)}
 /* hint ver ficha */
-.pcard-viewhint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) translateY(8px);z-index:5;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;background:var(--red);padding:7px 16px;border-radius:40px;opacity:0;transition:opacity .4s,transform .4s;white-space:nowrap}
+.pcard-viewhint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) translateY(8px);z-index:7;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;background:var(--red);padding:8px 18px;border-radius:40px;opacity:0;transition:opacity .4s,transform .4s;white-space:nowrap;box-shadow:0 8px 20px -6px rgba(200,16,46,.6)}
 .pcard:hover .pcard-viewhint{opacity:1;transform:translateX(-50%) translateY(0)}
-.pcard:hover .pcard-stats{opacity:0;transition:opacity .3s}
-.pcard:hover .pcard-foot .pcard-name,.pcard:hover .pcard-foot .pcard-club{transition:transform .4s;transform:translateY(-4px)}
+.pcard:hover .pcard-stats{opacity:0}
 
 .pcard-bg.ya{background-image:url('assets/asprilla.jpg')}
-.pcard-bg.jd{background-image:url('assets/duran.jpg');background-position:center 20%}
+.pcard-bg.jd{background-image:url('assets/duran.jpg');background-position:center 18%}
 .pcard-bg.jm{background-image:url('assets/martinez.jpg')}
 .pcard-bg.jb{background-image:url('assets/bonilla.jpg')}
 .pcard-bg.jdz{background-image:url('assets/diaz.jpg')}
@@ -502,7 +528,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('asprilla')">
       <div class="pcard-inner">
         <div class="pcard-num">10</div>
-        <div class="pcard-bg ya"></div>
+        <div class="pcard-bg ya"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">83</div><div class="p">EXT</div></div>
         <span class="pcard-flag">🇨🇴</span>
         <div class="pcard-foot">
@@ -524,7 +550,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('duran')">
       <div class="pcard-inner">
         <div class="pcard-num">9</div>
-        <div class="pcard-bg jd"></div>
+        <div class="pcard-bg jd"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">85</div><div class="p">DC</div></div>
         <span class="pcard-flag">🇨🇴</span>
         <div class="pcard-foot">
@@ -546,7 +572,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('martinez')">
       <div class="pcard-inner">
         <div class="pcard-num">8</div>
-        <div class="pcard-bg jm"></div>
+        <div class="pcard-bg jm"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">76</div><div class="p">MC</div></div>
         <span class="pcard-flag">🇨🇴</span>
         <div class="pcard-foot">
@@ -568,7 +594,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('bonilla')">
       <div class="pcard-inner">
         <div class="pcard-num">4</div>
-        <div class="pcard-bg jb"></div>
+        <div class="pcard-bg jb"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">72</div><div class="p">DEF</div></div>
         <span class="pcard-flag">🇨🇴</span>
         <div class="pcard-foot">
@@ -590,7 +616,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('diaz')">
       <div class="pcard-inner">
         <div class="pcard-num">7</div>
-        <div class="pcard-bg jdz"></div>
+        <div class="pcard-bg jdz"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">75</div><div class="p">EXT</div></div>
         <span class="pcard-flag">🇨🇴</span>
         <div class="pcard-foot">
@@ -612,7 +638,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('garcia')">
       <div class="pcard-inner">
         <div class="pcard-num">14</div>
-        <div class="pcard-bg ce"></div>
+        <div class="pcard-bg ce"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">73</div><div class="p">MED</div></div>
         <span class="pcard-flag">🇪🇨</span>
         <div class="pcard-foot">
@@ -634,7 +660,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     <div class="pcard" onclick="openFicha('torres')">
       <div class="pcard-inner">
         <div class="pcard-num">9</div>
-        <div class="pcard-bg dm"></div>
+        <div class="pcard-bg dm"></div><div class="pcard-tint"></div>
         <div class="pcard-ovr"><div class="n">72</div><div class="p">DEL</div></div>
         <span class="pcard-flag">🇨🇴</span>
         <div class="pcard-foot">
