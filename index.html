@@ -135,55 +135,53 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:fl
 .team-ig{display:inline-block;margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:rgba(248,246,241,0.6);text-decoration:none;transition:color .3s}
 .team-ig:hover{color:#fff}
 
-/* PLAYERS GRID */
-.players{background:var(--black);padding:120px 0 60px}
+/* PLAYERS GRID — ESTILO EA SPORTS FC */
+.players{background:radial-gradient(circle at 50% 0%,#15151c,#0a0a0c 70%);padding:120px 0 90px}
 .players-header{padding:0 48px 60px;display:flex;justify-content:space-between;align-items:flex-end}
 .players-title{font-family:'Anton',sans-serif;font-size:clamp(40px,6vw,80px);line-height:0.9;letter-spacing:-1px}
 .players-title .outline{color:transparent;-webkit-text-stroke:1px var(--white)}
 .players-subtitle{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.35);font-weight:400;max-width:280px;text-align:right;line-height:1.7}
-.players-masonry{display:grid;grid-template-columns:repeat(12,1fr);gap:3px}
-.pcard:nth-child(1){grid-column:1/9;grid-row:1}
-.pcard:nth-child(2){grid-column:9/13;grid-row:1}
-.pcard:nth-child(3){grid-column:1/5;grid-row:2}
-.pcard:nth-child(4){grid-column:5/13;grid-row:2}
-.pcard:nth-child(5){grid-column:1/5;grid-row:3}
-.pcard:nth-child(6){grid-column:5/9;grid-row:3}
-.pcard:nth-child(7){grid-column:9/13;grid-row:3}
-.pcard{position:relative;overflow:hidden;cursor:none}
-.pcard-inner{position:relative;padding-top:110%;background:var(--black);overflow:hidden}
-.pcard:nth-child(1) .pcard-inner{padding-top:65%}
-.pcard:nth-child(2) .pcard-inner{padding-top:140%}
-.pcard:nth-child(3) .pcard-inner{padding-top:120%}
-.pcard:nth-child(4) .pcard-inner{padding-top:75%}
-.pcard:nth-child(5) .pcard-inner{padding-top:120%}
-.pcard:nth-child(6) .pcard-inner{padding-top:120%}
-.pcard:nth-child(7) .pcard-inner{padding-top:120%}
-.pcard-bg{position:absolute;inset:0;background-size:cover;background-position:center 15%;transition:transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);filter:grayscale(30%)}
-.pcard:hover .pcard-bg{transform:scale(1.07);filter:grayscale(0%)}
-.pcard-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.96) 0%,rgba(11,11,11,0.2) 60%,transparent 100%);transition:background 0.4s}
-.pcard:hover .pcard-overlay{background:linear-gradient(to top,rgba(11,11,11,0.98) 0%,rgba(11,11,11,0.5) 60%,rgba(200,16,46,0.1) 100%)}
-.pcard::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform 0.5s cubic-bezier(0.77,0,0.18,1);z-index:5}
-.pcard:hover::before{transform:scaleY(1)}
-.pcard-content{position:absolute;bottom:0;left:0;right:0;padding:28px 32px;z-index:3}
-.pcard-flag{font-size:22px;margin-bottom:4px;display:block}
-.pcard-name{font-family:'Anton',sans-serif;font-size:clamp(28px,3.5vw,54px);line-height:0.9;color:var(--white);margin-bottom:4px}
-.pcard-name .fam{display:block;font-size:0.6em;color:rgba(248,246,241,0.45);letter-spacing:1px}
-.pcard-club{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:rgba(248,246,241,0.4);font-weight:400;margin-bottom:10px;transform:translateY(8px);opacity:0;transition:transform 0.4s,opacity 0.4s}
-.pcard:hover .pcard-club{transform:translateY(0);opacity:1}
-.pcard-trophy{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(200,16,46,0.9);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--white);transform:translateY(8px);opacity:0;transition:transform 0.4s 0.05s,opacity 0.4s 0.05s}
-.pcard:hover .pcard-trophy{transform:translateY(0);opacity:1}
-/* "Ver ficha" hint */
-.pcard-viewhint{position:absolute;top:24px;left:32px;z-index:4;display:flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff;opacity:0;transform:translateX(-10px);transition:opacity .4s,transform .4s}
-.pcard-viewhint .badge{width:26px;height:26px;border:1px solid rgba(255,255,255,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
-.pcard:hover .pcard-viewhint{opacity:1;transform:translateX(0)}
+.players-masonry{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:0 48px}
+
+/* CARTA */
+.pcard{position:relative;cursor:none;border-radius:14px;overflow:hidden;background:linear-gradient(160deg,#1a1a22 0%,#0d0d12 100%);border:1px solid rgba(248,246,241,0.08);transition:transform .5s cubic-bezier(0.16,1,0.3,1),border-color .4s,box-shadow .4s;aspect-ratio:3/4.4}
+.pcard:hover{transform:translateY(-12px);border-color:rgba(200,16,46,0.5);box-shadow:0 30px 60px -25px rgba(0,0,0,.9),0 0 40px -20px rgba(200,16,46,.5)}
+.pcard-inner{position:absolute;inset:0}
+/* número dorsal gigante detrás */
+.pcard-num{position:absolute;top:-10px;right:6px;font-family:'Anton',sans-serif;font-size:170px;color:rgba(248,246,241,0.05);line-height:1;pointer-events:none;z-index:1;transition:color .4s}
+.pcard:hover .pcard-num{color:rgba(200,16,46,0.12)}
+/* foto recortada del jugador (PNG ideal) */
+.pcard-bg{position:absolute;left:0;right:0;top:0;height:74%;background-size:cover;background-position:center 18%;z-index:2;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);-webkit-mask-image:linear-gradient(to bottom,#000 72%,transparent 100%);mask-image:linear-gradient(to bottom,#000 72%,transparent 100%)}
+.pcard:hover .pcard-bg{transform:scale(1.06)}
+/* OVR + posición arriba izquierda estilo FIFA */
+.pcard-ovr{position:absolute;top:16px;left:16px;z-index:4;text-align:center;line-height:1}
+.pcard-ovr .n{font-family:'Anton',sans-serif;font-size:34px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+.pcard-ovr .p{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;color:var(--red);font-weight:700;margin-top:-2px}
+.pcard-flag{position:absolute;top:18px;right:16px;z-index:4;font-size:20px}
+/* franja inferior con nombre + stats */
+.pcard-foot{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 18px 18px;background:linear-gradient(to top,#0b0b0e 60%,transparent 100%)}
+.pcard-name{font-family:'Anton',sans-serif;font-size:22px;line-height:0.95;color:#fff;text-align:center;margin-bottom:2px}
+.pcard-name .fam{display:block;font-size:0.55em;color:rgba(248,246,241,0.5);letter-spacing:1px}
+.pcard-club{font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:600;text-align:center;margin-bottom:12px}
+/* stats EA: 3 columnas x 2 filas */
+.pcard-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 4px;border-top:1px solid rgba(248,246,241,0.1);padding-top:12px}
+.pcard-stat{text-align:center}
+.pcard-stat .v{font-family:'Anton',sans-serif;font-size:17px;color:#fff;line-height:1}
+.pcard-stat .k{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:1px;color:rgba(248,246,241,0.45);font-weight:600;margin-top:1px}
+.pcard-stat .v.hi{color:var(--red)}
+/* hint ver ficha */
+.pcard-viewhint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) translateY(8px);z-index:5;font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#fff;background:var(--red);padding:7px 16px;border-radius:40px;opacity:0;transition:opacity .4s,transform .4s;white-space:nowrap}
+.pcard:hover .pcard-viewhint{opacity:1;transform:translateX(-50%) translateY(0)}
+.pcard:hover .pcard-stats{opacity:0;transition:opacity .3s}
+.pcard:hover .pcard-foot .pcard-name,.pcard:hover .pcard-foot .pcard-club{transition:transform .4s;transform:translateY(-4px)}
+
 .pcard-bg.ya{background-image:url('assets/representante_asprilla.jpg')}
-.pcard-bg.jd{background-image:url('assets/duran-festejo.jpg');background-position:center 30%}
+.pcard-bg.jd{background-image:url('assets/duran-festejo.jpg');background-position:center 20%}
 .pcard-bg.jm{background-image:url('assets/calimartinez.jpg')}
-.pcard-bg.jb{background-image:url('assets/asprilla.jpg')}
+.pcard-bg.jb{background-image:url('assets/bonilla.jpg')}
 .pcard-bg.jdz{background-image:linear-gradient(135deg,#1a1a2e,#0a0a14)}
 .pcard-bg.ce{background-image:linear-gradient(135deg,#002400,#0a1a0a)}
 .pcard-bg.dm{background-image:linear-gradient(135deg,#241400,#1a0a00)}
-.pcard-num{position:absolute;top:20px;right:24px;font-family:'Anton',sans-serif;font-size:100px;color:rgba(248,246,241,0.04);line-height:1;pointer-events:none;z-index:2}
 
 /* ════════ FICHA TÉCNICA MODAL ════════ */
 .ficha-overlay{
@@ -333,16 +331,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
   .nav-right .nav-link{display:none}
   .about{grid-template-columns:1fr}
   .about-right{grid-template-columns:1fr 1fr}
-  .players-masonry{grid-template-columns:1fr 1fr}
-  .pcard:nth-child(1){grid-column:1/3}
-  .pcard:nth-child(2){grid-column:1/3}
-  .pcard:nth-child(3){grid-column:1/2}
-  .pcard:nth-child(4){grid-column:2/3}
-  .pcard:nth-child(5){grid-column:1/2}
-  .pcard:nth-child(6){grid-column:2/3}
-  .pcard:nth-child(7){grid-column:1/3}
-  .pcard:nth-child(n) .pcard-inner{padding-top:120%}
-  .pcard:nth-child(1) .pcard-inner,.pcard:nth-child(2) .pcard-inner,.pcard:nth-child(7) .pcard-inner{padding-top:75%}
+  .players-masonry{grid-template-columns:1fr 1fr;padding:0 24px;gap:14px}
   .deals-grid{grid-template-columns:1fr 1fr}
   .team-grid{grid-template-columns:1fr}
   .services-grid{grid-template-columns:1fr}
@@ -512,86 +501,155 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
   <div class="players-masonry">
     <div class="pcard" onclick="openFicha('asprilla')">
       <div class="pcard-inner">
-        <div class="pcard-bg ya"></div><div class="pcard-overlay"></div><div class="pcard-num">10</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴 🇹🇷</span>
-          <div class="pcard-name"><span class="fam">Yaser</span>ASPRILLA</div>
-          <div class="pcard-club">Galatasaray SK — Extremo</div>
-          <div class="pcard-trophy">🏆 Campeón Süperlig</div>
+        <div class="pcard-num">10</div>
+        <div class="pcard-bg ya"></div>
+        <div class="pcard-ovr"><div class="n">83</div><div class="p">EXT</div></div>
+        <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-foot">
+          <div class="pcard-name"><span class="fam">Yáser</span>ASPRILLA</div>
+          <div class="pcard-club">Galatasaray</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v hi">86</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v">78</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v">82</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v hi">88</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v">42</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v">70</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
+
     <div class="pcard" onclick="openFicha('duran')">
       <div class="pcard-inner">
-        <div class="pcard-bg jd"></div><div class="pcard-overlay"></div><div class="pcard-num">9</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴 🇷🇺 🇹🇷</span>
-          <div class="pcard-name"><span class="fam">Jader</span>DURÁN</div>
-          <div class="pcard-club">FC Zenit / Fenerbahçe</div>
-          <div class="pcard-trophy">🏅 Süper Kupa</div>
+        <div class="pcard-num">9</div>
+        <div class="pcard-bg jd"></div>
+        <div class="pcard-ovr"><div class="n">85</div><div class="p">DC</div></div>
+        <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-foot">
+          <div class="pcard-name"><span class="fam">Jhon</span>DURÁN</div>
+          <div class="pcard-club">Zenit · Al-Nassr</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v hi">85</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v hi">87</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v">72</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v">80</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v">38</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v hi">89</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
+
     <div class="pcard" onclick="openFicha('martinez')">
       <div class="pcard-inner">
-        <div class="pcard-bg jm"></div><div class="pcard-overlay"></div><div class="pcard-num">8</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-num">8</div>
+        <div class="pcard-bg jm"></div>
+        <div class="pcard-ovr"><div class="n">76</div><div class="p">MC</div></div>
+        <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-foot">
           <div class="pcard-name"><span class="fam">Joahn</span>MARTÍNEZ</div>
           <div class="pcard-club">Deportivo Cali</div>
-          <div class="pcard-trophy">✅ Renovación 2029</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v">74</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v">70</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v hi">82</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v">78</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v">68</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v hi">84</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
+
     <div class="pcard" onclick="openFicha('bonilla')">
       <div class="pcard-inner">
-        <div class="pcard-bg jb"></div><div class="pcard-overlay"></div><div class="pcard-num">4</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-num">4</div>
+        <div class="pcard-bg jb"></div>
+        <div class="pcard-ovr"><div class="n">72</div><div class="p">DEF</div></div>
+        <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-foot">
           <div class="pcard-name"><span class="fam">Juan D.</span>BONILLA</div>
-          <div class="pcard-club">En activo</div>
-          <div class="pcard-trophy">⚽ Defensa</div>
+          <div class="pcard-club">Promesa Sub-20</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v">70</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v">45</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v">74</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v">68</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v hi">80</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v hi">81</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
+
     <div class="pcard" onclick="openFicha('diaz')">
       <div class="pcard-inner">
-        <div class="pcard-bg jdz"></div><div class="pcard-overlay"></div><div class="pcard-num">7</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴 🇵🇱</span>
+        <div class="pcard-num">7</div>
+        <div class="pcard-bg jdz"></div>
+        <div class="pcard-ovr"><div class="n">75</div><div class="p">EXT</div></div>
+        <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-foot">
           <div class="pcard-name"><span class="fam">Jesús</span>DÍAZ</div>
-          <div class="pcard-club">Zagłębie Lubin — Polonia</div>
-          <div class="pcard-trophy">⚽ Ekstraklasa</div>
+          <div class="pcard-club">Zagłębie Lubin</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v hi">82</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v">74</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v">76</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v">80</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v">40</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v">72</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
+
     <div class="pcard" onclick="openFicha('garcia')">
       <div class="pcard-inner">
-        <div class="pcard-bg ce"></div><div class="pcard-overlay"></div><div class="pcard-num">14</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇪🇨</span>
+        <div class="pcard-num">14</div>
+        <div class="pcard-bg ce"></div>
+        <div class="pcard-ovr"><div class="n">73</div><div class="p">MED</div></div>
+        <span class="pcard-flag">🇪🇨</span>
+        <div class="pcard-foot">
           <div class="pcard-name"><span class="fam">Christian</span>GARCÍA</div>
-          <div class="pcard-club">Independiente Juniors</div>
-          <div class="pcard-trophy">🌎 Ecuador U23</div>
+          <div class="pcard-club">Indep. Juniors</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v">76</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v">68</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v hi">78</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v">76</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v">72</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v hi">82</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
+
     <div class="pcard" onclick="openFicha('torres')">
       <div class="pcard-inner">
-        <div class="pcard-bg dm"></div><div class="pcard-overlay"></div><div class="pcard-num">9</div>
-        <div class="pcard-viewhint"><span class="badge">+</span> Ver ficha</div>
-        <div class="pcard-content">
-          <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-num">9</div>
+        <div class="pcard-bg dm"></div>
+        <div class="pcard-ovr"><div class="n">72</div><div class="p">DEL</div></div>
+        <span class="pcard-flag">🇨🇴</span>
+        <div class="pcard-foot">
           <div class="pcard-name"><span class="fam">Liberman</span>TORRES</div>
-          <div class="pcard-club">Manta FC — Ecuador</div>
-          <div class="pcard-trophy">⚽ Atacante</div>
+          <div class="pcard-club">Manta FC</div>
+          <div class="pcard-stats">
+            <div class="pcard-stat"><div class="v hi">80</div><div class="k">RIT</div></div>
+            <div class="pcard-stat"><div class="v">78</div><div class="k">TIR</div></div>
+            <div class="pcard-stat"><div class="v">70</div><div class="k">PAS</div></div>
+            <div class="pcard-stat"><div class="v">77</div><div class="k">REG</div></div>
+            <div class="pcard-stat"><div class="v">38</div><div class="k">DEF</div></div>
+            <div class="pcard-stat"><div class="v">75</div><div class="k">FÍS</div></div>
+          </div>
         </div>
+        <div class="pcard-viewhint">Ver ficha completa →</div>
       </div>
     </div>
   </div>
@@ -737,7 +795,7 @@ const PLAYERS = {
     first:"Juan David", last:"Bonilla", fullname:"Juan David Bonilla",
     flags:"🇨🇴", club:"Joven promesa · Colombia",
     ovr:"72", posBadge:"DEF",
-    photo:"",
+    photo:"assets/bonilla.jpg",
     bio:[["Nacimiento","18.01.2006"],["Posición","Defensa Central"],["Selección","Colombia 🇨🇴"],["Categoría","Sub-20"],["Pasaporte","COL"],["Perfil","Alto potencial"]],
     attrs:[["Marca",80],["Juego aéreo",82],["Anticipación",78],["Fuerza",81],["Salida de balón",74]],
     traj:[["2024","Proyección profesional"],["2022","Categorías formativas"]],
