@@ -231,13 +231,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:22px 48px;display:fl
 
 /* lado izquierdo: foto + carta tipo FIFA */
 .ficha-photo{
-  position:relative;min-height:420px;
+  position:relative;min-height:480px;
   background:linear-gradient(160deg,#1c1c24,#0a0a0d);
-  background-size:cover;background-position:center top;
+  background-size:cover;background-position:center 12%;
   display:flex;flex-direction:column;justify-content:space-between;
   padding:28px;
 }
-.ficha-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(11,11,11,0.9),transparent 55%);z-index:1}
+.ficha-photo::after{content:'';position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to top, rgba(11,11,11,0.95) 0%, rgba(11,11,11,0.15) 50%, rgba(11,11,11,0.45) 100%),
+    linear-gradient(110deg, rgba(200,16,46,0.12), transparent 45%)}
 .ficha-rating{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start}
 .ficha-rating .ovr{font-family:'Anton',sans-serif;font-size:64px;line-height:0.8;color:var(--red)}
 .ficha-rating .ovr-l{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:rgba(248,246,241,0.6)}
@@ -412,7 +415,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     </div>
   </div>
   <div class="slide" id="slide-1">
-    <div class="slide-img" style="background-image:url('assets/hero-duran.jpg');background-position:center 25%;"></div>
+    <div class="slide-img" style="background-image:url('assets/hero-duran.jpg');background-position:center 8%;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <div class="slide-eyebrow">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier → 🇸🇦 Saudi Pro League · €77M</div>
@@ -426,7 +429,7 @@ footer{background:var(--black);border-top:1px solid rgba(248,246,241,0.06);paddi
     </div>
   </div>
   <div class="slide" id="slide-2">
-    <div class="slide-img" style="background-image:url('assets/hero-martinez.jpg');background-position:center 15%;"></div>
+    <div class="slide-img" style="background-image:url('assets/calimartinez.jpg');background-position:center 20%;"></div>
     <div class="slide-overlay"></div>
     <div class="slide-content">
       <div class="slide-eyebrow">🇨🇴 Colombia — Deal Done ✅</div>
@@ -790,6 +793,7 @@ const PLAYERS = {
     flags:"🇨🇴 🇹🇷", club:"Galatasaray · Turquía (cedido de Girona)",
     ovr:"83", posBadge:"EXT",
     photo:"assets/asprilla.png",
+    photoBig:"assets/hero-asprilla.jpg",
     bio:[["Nacimiento","19.11.2003"],["Posición","Extremo / Mediapunta"],["Selección","Colombia 🇨🇴"],["Club actual","Galatasaray"],["Última venta","€18M"],["Pasaporte","COL"]],
     attrs:[["Regate",88],["Velocidad",86],["Visión de juego",84],["Pase",82],["Tiro",78]],
     traj:[["2026","Galatasaray (TUR) — cedido"],["2024","Girona FC (ESP) — €18M"],["2022","Watford FC (ENG)"],["2021","Envigado FC (COL)"]],
@@ -800,6 +804,7 @@ const PLAYERS = {
     flags:"🇨🇴 🇷🇺", club:"Zenit San Petersburgo · Rusia (cedido de Al-Nassr)",
     ovr:"85", posBadge:"DC",
     photo:"assets/duran.png",
+    photoBig:"assets/card_original_duran.jpg",
     bio:[["Nacimiento","13.12.2003"],["Posición","Delantero Centro"],["Selección","Colombia 🇨🇴"],["Club actual","Zenit (cedido)"],["Récord venta","€77M"],["Pasaporte","COL"]],
     attrs:[["Definición",87],["Potencia",89],["Velocidad",85],["Juego aéreo",82],["Remate lejano",84]],
     traj:[["2026","Zenit (RUS) — cedido"],["2025","Fenerbahçe (TUR) — cedido"],["2025","Al-Nassr (KSA) — €77M"],["2023","Aston Villa (ENG) — €29M"],["2022","Chicago Fire (USA)"]],
@@ -810,6 +815,7 @@ const PLAYERS = {
     flags:"🇨🇴", club:"Deportivo Cali · Colombia",
     ovr:"76", posBadge:"MC",
     photo:"assets/martinez.png",
+    photoBig:"assets/calimartinez.jpg",
     bio:[["Posición","Mediocampista"],["Selección","Colombia 🇨🇴"],["Club actual","Deportivo Cali"],["Contrato","2029"],["Pasaporte","COL"],["Estado","Renovado"]],
     attrs:[["Pase",82],["Visión de juego",80],["Regate",78],["Recuperación",75],["Resistencia",84]],
     traj:[["2025","Deportivo Cali — Renovación 2029"],["2023","Deportivo Cali (COL)"],["2021","Divisiones menores"]],
@@ -820,6 +826,7 @@ const PLAYERS = {
     flags:"🇨🇴", club:"Joven promesa · Colombia",
     ovr:"72", posBadge:"DEF",
     photo:"assets/bonilla.png",
+    photoBig:"assets/cardoriginalbonilla.jpg",
     bio:[["Nacimiento","18.01.2006"],["Posición","Defensa Central"],["Selección","Colombia 🇨🇴"],["Categoría","Sub-20"],["Pasaporte","COL"],["Perfil","Alto potencial"]],
     attrs:[["Marca",80],["Juego aéreo",82],["Anticipación",78],["Fuerza",81],["Salida de balón",74]],
     traj:[["2024","Proyección profesional"],["2022","Categorías formativas"]],
@@ -830,6 +837,7 @@ const PLAYERS = {
     flags:"🇨🇴 🇵🇱", club:"Zagłębie Lubin · Polonia",
     ovr:"75", posBadge:"EXT",
     photo:"assets/diaz.png",
+    photoBig:"assets/cardjesusdiaz.jpg",
     bio:[["Nacimiento","21.05.1999"],["Posición","Extremo / Atacante"],["Selección","Colombia 🇨🇴"],["Club actual","Zagłębie Lubin"],["Liga","Ekstraklasa"],["Pasaporte","COL"]],
     attrs:[["Regate",80],["Velocidad",82],["Pase",76],["Tiro",78],["Resistencia",80]],
     traj:[["2025","Zagłębie Lubin (POL) — cedido"],["2024","Raków Częstochowa (POL) — cedido"],["2024","Stal Rzeszów (POL)"]],
@@ -840,6 +848,7 @@ const PLAYERS = {
     flags:"🇪🇨", club:"Independiente Juniors · Ecuador",
     ovr:"73", posBadge:"MED",
     photo:"assets/garcia.png",
+    photoBig:"assets/carddsChristian_Garcia.jpg",
     bio:[["Nacimiento","06.07.2004"],["Posición","Mediocampista"],["Selección","Ecuador U23 🇪🇨"],["Club actual","Independiente Juniors"],["Desde","2023"],["Pasaporte","ECU"]],
     attrs:[["Pase",78],["Visión de juego",77],["Regate",76],["Recuperación",78],["Resistencia",82]],
     traj:[["2023","Independiente Juniors (ECU)"],["2021","Formación"]],
@@ -850,6 +859,7 @@ const PLAYERS = {
     flags:"🇨🇴", club:"Manta FC · Ecuador",
     ovr:"72", posBadge:"DEL",
     photo:"assets/torres.png",
+    photoBig:"assets/cardliberman.jpg",
     bio:[["Nacimiento","16.05.2002"],["Posición","Atacante"],["Club actual","Manta FC"],["Desde","2025"],["Pasaporte","COL"],["Liga","Serie A ECU"]],
     attrs:[["Definición",78],["Velocidad",80],["Regate",77],["Potencia",75],["Resistencia",80]],
     traj:[["2025","Manta FC (ECU)"],["2023","Trayectoria previa"]],
@@ -871,7 +881,8 @@ function openFicha(key){
   // foto
   const ph=document.getElementById('fichaPhoto');
   const phPh=document.getElementById('fichaPhotoPh');
-  if(p.photo){ph.style.backgroundImage="url('"+p.photo+"')";phPh.textContent="";}
+  if(p.photoBig){ph.style.backgroundImage="url('"+p.photoBig+"')";phPh.textContent="";}
+  else if(p.photo){ph.style.backgroundImage="url('"+p.photo+"')";phPh.textContent="";}
   else{ph.style.backgroundImage="linear-gradient(160deg,#1c1c24,#0a0a0d)";phPh.textContent="assets/"+key+".jpg";}
 
   // bio
