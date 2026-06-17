@@ -878,12 +878,23 @@ function openFicha(key){
   document.getElementById('fPosBadge').textContent=p.posBadge;
   document.getElementById('fHighlights').href=p.highlights||'#';
 
-  // foto
+  // foto — limpiar primero para no dejar pegada la del jugador anterior
   const ph=document.getElementById('fichaPhoto');
   const phPh=document.getElementById('fichaPhotoPh');
-  if(p.photoBig){ph.style.backgroundImage="url('"+p.photoBig+"')";phPh.textContent="";}
-  else if(p.photo){ph.style.backgroundImage="url('"+p.photo+"')";phPh.textContent="";}
-  else{ph.style.backgroundImage="linear-gradient(160deg,#1c1c24,#0a0a0d)";phPh.textContent="assets/"+key+".jpg";}
+  ph.style.backgroundImage="linear-gradient(160deg,#1c1c24,#0a0a0d)";
+  phPh.textContent="";
+  // arma lista de candidatas: photoBig, su version en minuscula, el png, y su minuscula
+  const cands=[];
+  [p.photoBig, p.photo].forEach(u=>{
+    if(u){ cands.push(u); cands.push(u.toLowerCase()); }
+  });
+  (function tryNext(i){
+    if(i>=cands.length) return;            // ninguna cargo: queda el fondo oscuro
+    const im=new Image();
+    im.onload=()=>{ ph.style.backgroundImage="url('"+cands[i]+"')"; };
+    im.onerror=()=>tryNext(i+1);
+    im.src=cands[i];
+  })(0);
 
   // bio
   const bio=document.getElementById('fBio');bio.innerHTML="";
